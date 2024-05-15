@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
     cursor: pointer;
     transition: filter 0.2s;
-    
-    height: 250px;
 
     display: flex;
     flex-direction: column;
@@ -16,5 +14,10 @@ export const Container = styled.div`
 
     &:hover {
         filter: brightness(0.9);
+    }
+
+    > img {
+        width: 128px;
+        height: 128px;
     }
 `;
