@@ -3,9 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
     cursor: pointer;
     transition: filter 0.2s;
-
-    width: 180px;
-    height: 240px;
+    
+    height: 250px;
 
     display: flex;
     flex-direction: column;

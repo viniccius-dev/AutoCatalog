@@ -17,6 +17,10 @@ export function Home() {
                     <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
                     <Card title="Volkswagen" img={VwImg} alt="Marca" />
                     <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
+                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
+                    <Card title="Volkswagen" img={VwImg} alt="Marca" />
+                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
+                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
                     <Card title="Volkswagen" img={VwImg} alt="Marca" />
                     <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
                 </main> 
