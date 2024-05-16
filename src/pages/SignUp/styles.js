@@ -29,6 +29,7 @@ export const Form = styled.form`
     > a {
         margin-top: 20px;
         color: ${({ theme }) => theme.COLORS.BLUE_100};
+        font-weight: 500;
     }
 
     > button {

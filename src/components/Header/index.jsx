@@ -2,6 +2,7 @@ import { Container, Wrapper } from './styles.js';
 import Logo from '../../assets/logo.png'
 
 import { Button } from '../Button';
+import { SignIn } from '../SignIn';
 
 export function Header() {
     {/* 
@@ -20,6 +21,8 @@ export function Header() {
                     <Button title="Cadastrar" />
                     <Button $border="true" title="Login" />
                 </div>
+
+                <SignIn />
             </Wrapper>
         </Container>
     );
