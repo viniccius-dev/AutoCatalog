@@ -4,6 +4,8 @@ import Logo from '../../assets/logo.png'
 import { Button } from '../Button';
 import { SignIn } from '../SignIn';
 
+import closeModal from '../../helpers/closeModal';
+
 export function Header() {
     {/* 
         <img
@@ -19,7 +21,7 @@ export function Header() {
 
                 <div>
                     <Button title="Cadastrar" />
-                    <Button $border="true" title="Login" />
+                    <Button $border="true" title="Login" id="loginHeaderButton" onClick={closeModal} />
                 </div>
 
                 <SignIn />

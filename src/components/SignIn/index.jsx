@@ -5,11 +5,13 @@ import { Container, Background, Form } from './styles';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
+import closeModal from '../../helpers/closeModal';
+
 export function SignIn() {
     return (
-        <Background>
-            <Container>
-                <FiX />
+        <Background id="loginModal" className="hidden">
+            <Container id="loginForm">
+                <FiX onClick={closeModal} className="closeButton"/>
 
                 <Form>
 
