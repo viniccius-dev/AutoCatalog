@@ -18,6 +18,7 @@ export const Background = styled.div`
 export const Container = styled.div`
     width: 80%;
     max-width: 400px;
+    border-radius: 25px;
 
     display: flex;
     flex-direction: column;
