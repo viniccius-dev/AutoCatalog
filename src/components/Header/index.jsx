@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { ButtonText } from '../ButtonText';
 import { SignIn } from '../SignIn';
 
-import closeModal from '../../utils/closeModal.js';
+import toggleModal from '../../utils/toggleModal.js';
 
 export function Header() {
     {/* 
@@ -21,7 +21,7 @@ export function Header() {
 
                 <div>
                     <ButtonText title="Cadastrar" to="/register" />
-                    <Button type="button" $border="true" title="Login" onClick={closeModal} id="loginHeaderButton"/>
+                    <Button type="button" $border="true" title="Login" onClick={toggleModal} id="loginHeaderButton"/>
                 </div>
 
                 <SignIn />

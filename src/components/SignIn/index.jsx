@@ -6,7 +6,7 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 
-import closeModal from '../../utils/closeModal';
+import closeModal from '../../utils/toggleModal';
 
 export function SignIn() {
     return (

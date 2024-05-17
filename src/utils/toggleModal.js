@@ -1,4 +1,4 @@
-export default function closeModal() {
+export default function toggleModal() {
 
     const loginModal = document.querySelector("#loginModal");
     const loginFormModal = document.querySelector("#loginForm");

@@ -8,6 +8,8 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 
+import toggleModal from '../../utils/toggleModal';
+
 export function SignUp() {
 
     const { register, handleSubmit } = useForm();
@@ -64,7 +66,7 @@ export function SignUp() {
 
                 <Button type="submit" $border="true" title="Cadastrar" />
 
-                <ButtonText title="Login" to="/" />
+                <ButtonText title="Login" to="/"/>
             </Form>
         </Container>
     );
