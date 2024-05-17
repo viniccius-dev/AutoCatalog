@@ -4,6 +4,7 @@ import { Container, Background, Form } from './styles';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { ButtonText } from '../../components/ButtonText';
 
 import closeModal from '../../utils/closeModal';
 
@@ -35,7 +36,7 @@ export function SignIn() {
                         <Button title="Login" $border="true" />
                     </div>
                     
-                    <p>Ainda não possui uma conta?<Button title="Cadastre-se aqui." /></p>
+                    <p>Ainda não possui uma conta?<ButtonText title="Cadastre-se aqui." to="/register"/></p>
 
                 </Form>
 

@@ -1,6 +1,7 @@
 import { Container, Wrapper } from './styles.js';
 
 import { Button } from '../Button';
+import { ButtonText } from '../ButtonText';
 import { SignIn } from '../SignIn';
 
 import closeModal from '../../utils/closeModal.js';
@@ -19,8 +20,8 @@ export function Header() {
                 <h1>AutoCatalog</h1>
 
                 <div>
-                    <Button title="Cadastrar" to="/register" />
-                    <Button $border="true" title="Login" id="loginHeaderButton" onClick={closeModal} />
+                    <ButtonText title="Cadastrar" to="/register" />
+                    <Button type="button" $border="true" title="Login" onClick={closeModal} id="loginHeaderButton"/>
                 </div>
 
                 <SignIn />

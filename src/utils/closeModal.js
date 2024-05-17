@@ -3,7 +3,7 @@ export default function closeModal() {
     const loginModal = document.querySelector("#loginModal");
     const loginFormModal = document.querySelector("#loginForm");
     const closeButton = document.querySelector(".closeButton");
-    const btnLogin = document.querySelector("#loginHeaderButton")
+    const btnLogin = document.querySelector("#loginHeaderButton");
 
     loginModal.classList.toggle("hidden");
     
