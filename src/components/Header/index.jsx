@@ -1,5 +1,4 @@
 import { Container, Wrapper } from './styles.js';
-import Logo from '../../assets/logo.png'
 
 import { Button } from '../Button';
 import { SignIn } from '../SignIn';
@@ -20,7 +19,7 @@ export function Header() {
                 <h1>AutoCatalog</h1>
 
                 <div>
-                    <Button title="Cadastrar" />
+                    <Button title="Cadastrar" to="/register" />
                     <Button $border="true" title="Login" id="loginHeaderButton" onClick={closeModal} />
                 </div>
 

@@ -20,7 +20,7 @@ export function SignUp() {
         <Container>
             <Background />
 
-            <Form onSubmit={handleSubmit(onSubmit)} id="registrationForm">
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <h1>AutoCatalog</h1>
                 <h2>Cadastre sua conta</h2>
 
