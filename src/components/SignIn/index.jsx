@@ -5,7 +5,7 @@ import { Container, Background, Form } from './styles';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
-import closeModal from '../../helpers/closeModal';
+import closeModal from '../../utils/closeModal';
 
 export function SignIn() {
     return (

@@ -4,7 +4,7 @@ import Logo from '../../assets/logo.png'
 import { Button } from '../Button';
 import { SignIn } from '../SignIn';
 
-import closeModal from '../../helpers/closeModal';
+import closeModal from '../../utils/closeModal.js';
 
 export function Header() {
     {/* 

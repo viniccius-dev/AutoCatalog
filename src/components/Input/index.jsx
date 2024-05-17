@@ -1,10 +1,13 @@
+import React, { forwardRef } from 'react';
 import { Container } from './styles';
 
-export function Input({icon: Icon, ...rest}) {
+const Input = forwardRef(({icon: Icon, ...rest}, ref) => {
     return(
         <Container>
             {Icon && <Icon size={20} />}
-            <input {...rest} />
+            <input ref={ref} {...rest} />
         </Container>
     );
-}
+});
+
+export { Input };
