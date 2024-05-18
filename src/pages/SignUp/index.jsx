@@ -8,15 +8,12 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 
-import toggleModal from '../../utils/toggleModal';
-
 export function SignUp() {
 
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async (e) => {
-        console.log(e);
-        await API.createaccount(e);
+        await API.login(e);
     }
 
     return(

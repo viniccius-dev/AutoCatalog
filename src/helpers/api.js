@@ -16,15 +16,40 @@ const API = {
         return json;
     },
 
-    createaccount:async (name, email, password) => {
-
-        await fetch(ApiBase+'/createaccount', {
-            method:'POST',
-            body: formData
+    createaccount:async (e) => {
+        const response = await fetch(ApiBase + '/createaccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(e) 
         });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
 
-
+    login:async (e) => {
+        const response = await fetch(ApiBase + '/loginuser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(e) 
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
     }
+
 
 
 };

@@ -1,4 +1,6 @@
 import { FiX, FiMail, FiLock } from 'react-icons/fi'
+import { useForm } from 'react-hook-form';
+import API from '../../helpers/api';
 
 import { Container, Background, Form } from './styles';
 
@@ -9,8 +11,16 @@ import { ButtonText } from '../../components/ButtonText';
 import closeModal from '../../utils/toggleModal';
 
 export function SignIn() {
+
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = async (e) => {
+        console.log(e);
+        await API.createaccount(e);
+    }
+    
     return (
-        <Background id="loginModal" className="hidden">
+        <Background onSubmit={handleSubmit(onSubmit)} id="loginModal" className="hidden">
             <Container id="loginForm">
                 <FiX onClick={closeModal} className="closeButton"/>
 
@@ -23,12 +33,14 @@ export function SignIn() {
                         placeholder="E-mail"
                         type="email"
                         icon={FiMail}
+                        {...register("email")}
                     />
 
                     <Input 
                         placeholder="Senha"
                         type="password"
                         icon={FiLock}
+                        {...register("password")}
                     />
 
                     <div>
