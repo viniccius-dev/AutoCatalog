@@ -1,6 +1,6 @@
 import { FiX, FiMail, FiLock } from 'react-icons/fi'
 import { useForm } from 'react-hook-form';
-import API from '../../helpers/api';
+import Login from '../../helpers/Listeners/login';
 
 import { Container, Background, Form } from './styles';
 
@@ -14,9 +14,8 @@ export function SignIn() {
 
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = async (e) => {
-        console.log(e);
-        await API.createaccount(e);
+    const onSubmit = (e) => {
+        Login(e);
     }
     
     return (

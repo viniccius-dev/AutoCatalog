@@ -1,6 +1,6 @@
 import { FiUser, FiPhoneCall, FiMail, FiLock } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
-import API from '../../helpers/api';
+import Register from '../../helpers/Listeners/register';
 
 import { Container, Form, Background } from './styles';
 
@@ -12,8 +12,8 @@ export function SignUp() {
 
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = async (e) => {
-        await API.login(e);
+    const onSubmit = (e) => {
+        Register(e);
     }
 
     return(

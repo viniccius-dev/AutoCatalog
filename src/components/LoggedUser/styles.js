@@ -12,7 +12,7 @@ export const Container = styled.div`
         border-radius: 50%;
     }
 
-    > div {
+    > div:first-of-type {
         display: flex;
         flex-direction: column;
         margin-right: 16px;
@@ -28,3 +28,18 @@ export const Container = styled.div`
         font-size: 18px;
     }
 `;
+
+export const NoAvatar = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
+
+    > svg {
+        font-size: 25px;
+    }
+`
