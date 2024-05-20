@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
     display: flex;
     align-items: center;
     text-align: right;
 
-    > img {
+    > a img {
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -38,6 +37,7 @@ export const NoAvatar = styled.div`
     height: 56px;
     border-radius: 50%;
     border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
+        color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
     > svg {
         font-size: 25px;

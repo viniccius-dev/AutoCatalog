@@ -1,4 +1,6 @@
 import { FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+
 import { Container, NoAvatar } from './styles';
 
 import storage from '../../helpers/storage';
@@ -13,22 +15,24 @@ export function LoggedUser() {
                 <strong>{profile.user.name}</strong>
             </div>
 
-            {
-                profile.user.name !== "" 
-                
-                ?
+            <Link to="/profile">
+                {
+                    profile.user.name !== "" 
+                    
+                    ?
 
-                <NoAvatar>
-                    <FiUser />
-                </NoAvatar>
+                    <NoAvatar>
+                        <FiUser />
+                    </NoAvatar>
 
-                :
+                    :
 
-                <img
-                    src={profile.user.avatar}
-                    alt="Foto do usuário"
-                />
-            }
+                    <img
+                        src={profile.user.avatar}
+                        alt="Foto do usuário"
+                    />
+                }
+            </Link>
         </Container>
     );
 }
