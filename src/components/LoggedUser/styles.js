@@ -37,7 +37,7 @@ export const NoAvatar = styled.div`
     height: 56px;
     border-radius: 50%;
     border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
-        color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
     > svg {
         font-size: 25px;

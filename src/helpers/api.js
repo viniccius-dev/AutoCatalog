@@ -1,4 +1,5 @@
 const ApiBase = 'http://localhost/projeto/backend/public' ;
+import storage from "./storage";
 
 const API = {
     
@@ -39,6 +40,25 @@ const API = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(e) 
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
+    updateaccount: async (formData) => {
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/updateaccount', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData 
         });
     
         if (!response.ok) {

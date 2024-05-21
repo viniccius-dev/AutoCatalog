@@ -17,7 +17,7 @@ export function LoggedUser() {
 
             <Link to="/profile">
                 {
-                    profile.user.name !== "" 
+                    profile.user.avatar === "" 
                     
                     ?
 

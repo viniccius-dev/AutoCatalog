@@ -1,4 +1,4 @@
-import { FiX, FiMail, FiLock } from 'react-icons/fi'
+import { FiX, FiMail, FiLock } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
 import Login from '../../helpers/Listeners/login';
 

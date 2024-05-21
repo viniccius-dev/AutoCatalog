@@ -72,3 +72,20 @@ export const Avatar = styled.div`
         }
     }
 `;
+
+export const NoAvatar = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 186px;
+    height: 186px;
+    border-radius: 50%;
+    border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+
+    > svg {
+        font-size: 80px;
+    }
+`
