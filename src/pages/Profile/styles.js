@@ -32,6 +32,7 @@ export const Form = styled.form`
 
     > button {
         width: 100%;
+        margin-bottom: 10px;
     }
 `;
 
@@ -46,6 +47,7 @@ export const Avatar = styled.div`
         border-radius: 50%;
         width: 186px;
         height: 186px;
+        object-fit: cover;
     }
 
     > label {

@@ -7,6 +7,7 @@ import storage from '../../helpers/storage';
 
 export function LoggedUser() {
     const profile = storage.get("profile");
+    const imagePath = "http://localhost/projeto/backend/public/media/user/";
 
     return (
         <Container>
@@ -28,7 +29,7 @@ export function LoggedUser() {
                     :
 
                     <img
-                        src={profile.user.avatar}
+                        src={`${imagePath}${profile.user.avatar}`}
                         alt="Foto do usuário"
                     />
                 }

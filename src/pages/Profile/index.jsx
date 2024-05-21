@@ -1,35 +1,40 @@
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Container, Form, Avatar, NoAvatar } from './styles';
 
 import storage from '../../helpers/storage';
 import UpdateAccount from '../../helpers/Listeners/updateProfile';
+import Loggout from '../../utils/loggout';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
 export function Profile() {
     const profile = storage.get("profile");
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const [avatarPreview, setAvatarPreview] = useState(profile.user.avatar || "");
     const [avatarFile, setAvatarFile] = useState(null); // Estado para armazenar o arquivo de avatar
 
+    const imagePath = "http://localhost/projeto/backend/public/media/user/"; // Defina o caminho da pasta de imagens no backend
+
+    useEffect(() => {
+        if (profile.user.avatar) {
+            setAvatarPreview(`${imagePath}${profile.user.avatar}`);
+        }
+    }, [profile.user.avatar]);
+
     const onSubmit = (data) => {
         const formData = new FormData();
-        
-        // Remove o campo avatar do objeto data
         delete data.avatar;
-        
-        // Adiciona os outros campos do formData
         for (const key in data) {
             formData.append(key, data[key]);
         }
-        
+
         if (avatarFile) {
-            formData.append('avatar', avatarFile); // Adiciona o arquivo de avatar separadamente
+            formData.append('avatar', avatarFile);
         }
 
         UpdateAccount(formData);
@@ -39,7 +44,8 @@ export function Profile() {
         const file = event.target.files[0];
         if (file) {
             setAvatarPreview(URL.createObjectURL(file));
-            setAvatarFile(file); // Armazena o arquivo de avatar no estado
+            setAvatarFile(file);
+            setValue("avatar", file);
         }
     }
 
@@ -107,6 +113,7 @@ export function Profile() {
                 />
 
                 <Button type="submit" $border="true" title="Salvar" />
+                <Button type="button" $border="true" title="Loggout" onClick={Loggout} />
             </Form>
         </Container>
     );

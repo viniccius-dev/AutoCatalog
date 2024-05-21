@@ -11,5 +11,9 @@ export default {
 
     clear: () => {
         localStorage.clear()
+    },
+
+    removeItem: (key) => {
+        localStorage.removeItem(key)
     }
 }

@@ -1,18 +1,18 @@
 import API from '../api';
+import storage from '../storage';
 
 export default async function UpdateAccount(body){
-    console.log(body);
     const data = await API.updateaccount(body);
+
+    console.log(data);
 
     if(data.status === 'error') {
         console.log(data.message)
         return;
     }
     
-    storage.clear();
-    const {token, ...profile} = data;
-    storage.save("token", token);
-    storage.save("profile", profile);
+    storage.removeItem("profile");
+    storage.save("profile", data);
     location.reload();
 
     return data;
