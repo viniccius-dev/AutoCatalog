@@ -17,12 +17,12 @@ export const Form = styled.form`
     text-align: center;
 
     > h1 {
-        font-size: 48px;
+        font-size: 44px;
     }
 
     > h2 {
         font-size: 24px;
-        margin: 25px 0;
+        margin: 20px 0;
         color: ${({ theme }) => theme.COLORS.BLUE_100};
     }
 

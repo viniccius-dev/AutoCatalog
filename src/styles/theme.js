@@ -9,6 +9,8 @@ export default {
         BACKGROUND_500: "#f5eaf7",
 
         WHITE: "#F4EDE8",
+        LIGHT_GREEN: "#32CD32",
+        LIGHT_RED: "#FF0000",
 
         BLUE_300: "#a3a4db",
         BLUE_200: "#7677ca",
