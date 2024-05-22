@@ -23,11 +23,11 @@ export function SignIn() {
     const onSubmit = async (e) => {
         const data = await API.login(e);
 
-        const {token, ...profile} = data;
-        storage.save("token", token);
-        storage.save("profile", profile);
-
         if(data.status === 'success'){
+            const {token, ...profile} = data;
+            storage.save("token", token);
+            storage.save("profile", profile);
+            
             closeModal();
             location.reload();
             return;

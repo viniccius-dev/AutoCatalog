@@ -6,17 +6,23 @@ import { useState, useEffect } from 'react';
 import { Container, Form, Avatar, NoAvatar } from './styles';
 
 import storage from '../../helpers/storage';
-import UpdateAccount from '../../helpers/Listeners/updateProfile';
+import API from '../../helpers/api';
 import Loggout from '../../utils/loggout';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { DisplayMessage } from '../../components/DisplayMessage';
 
 export function Profile() {
     const profile = storage.get("profile");
+    
     const { register, handleSubmit, setValue } = useForm();
     const [avatarPreview, setAvatarPreview] = useState(profile.user.avatar || "");
     const [avatarFile, setAvatarFile] = useState(null); // Estado para armazenar o arquivo de avatar
+
+    const [type, setType] = useState("");
+    const [message, setMessage] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
 
     const imagePath = "http://localhost/projeto/backend/public/media/user/"; // Defina o caminho da pasta de imagens no backend
 
@@ -26,7 +32,7 @@ export function Profile() {
         }
     }, [profile.user.avatar]);
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const formData = new FormData();
         delete data.avatar;
         for (const key in data) {
@@ -37,7 +43,23 @@ export function Profile() {
             formData.append('avatar', avatarFile);
         }
 
-        UpdateAccount(formData);
+        const response = await API.updateaccount(formData);
+
+        setType(response.status);
+        setMessage(response.message);
+
+        
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 5000);
+
+        if(response.status === 'error') {
+            return;
+        }
+
+        storage.removeItem("profile");
+        storage.save("profile", response);
     }
 
     const handleAvatarChange = (event) => {
@@ -111,6 +133,8 @@ export function Profile() {
                     icon={FiLock}
                     {...register("password")}
                 />
+
+                {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
 
                 <Button type="submit" $border="true" title="Salvar" />
                 <Button type="button" $border="true" title="Loggout" onClick={Loggout} />

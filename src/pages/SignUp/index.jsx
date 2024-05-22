@@ -34,7 +34,7 @@ export function SignUp() {
             return;
         }
 
-        const data = await API.createaccount(e);;
+        const data = await API.createaccount(e);
 
         setType(data.status);
         setMessage(data.message);
