@@ -1,29 +1,53 @@
 import { FiX, FiMail, FiLock } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
-import Login from '../../helpers/Listeners/login';
+import { useState } from 'react';
 
 import { Container, Background, Form } from './styles';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
+import { DisplayMessage } from '../DisplayMessage';
 
+import API from '../../helpers/api';
+import storage from '../../helpers/storage';
 import closeModal from '../../utils/toggleModal';
 
 export function SignIn() {
 
     const { register, handleSubmit } = useForm();
+    const [type, setType] = useState("");
+    const [message, setMessage] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
 
-    const onSubmit = (e) => {
-        Login(e);
+    const onSubmit = async (e) => {
+        const data = await API.login(e);
+
+        const {token, ...profile} = data;
+        storage.save("token", token);
+        storage.save("profile", profile);
+
+        if(data.status === 'success'){
+            closeModal();
+            location.reload();
+            return;
+        }
+
+        setType(data.status);
+        setMessage(data.message);
+        
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 5000);
     }
     
     return (
-        <Background onSubmit={handleSubmit(onSubmit)} id="loginModal" className="hidden">
+        <Background id="loginModal" className="hidden">
             <Container id="loginForm">
                 <FiX onClick={closeModal} className="closeButton"/>
 
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)} >
 
                     <h3>Bem-vindo!</h3>
                     <p>Faça seu login</p>
@@ -41,6 +65,8 @@ export function SignIn() {
                         icon={FiLock}
                         {...register("password")}
                     />
+
+                    {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
 
                     <div>
                         <Button title="Esqueci minha senha" />

@@ -36,6 +36,10 @@ export const Form = styled.form`
         margin-top: 15px;
         width: 100%;
     }
+
+    #display-message {
+        max-width: 241px;
+    }
 `;
 
 export const Background = styled.div`
