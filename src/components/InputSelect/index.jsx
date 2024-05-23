@@ -1,6 +1,6 @@
 import { FiChevronDown, FiChevronUp, FiCheck } from 'react-icons/fi';
 
-import { SelectButton, Chevrons, OptionsList, Option } from './styles';
+import { Container, SelectButton, Chevrons, OptionsList, Option } from './styles';
 import { useState } from 'react';
 
 export function InputSelect({ title, group, options, onSelect }) {
@@ -18,7 +18,7 @@ export function InputSelect({ title, group, options, onSelect }) {
     }
 
     return (
-        <>
+        <Container>
             <SelectButton onClick={toggleDropdown}>
                 <div>
                     {selectedOption ? selectedOption.name : title}
@@ -46,6 +46,6 @@ export function InputSelect({ title, group, options, onSelect }) {
                     ))}
                 </OptionsList>
             )}
-        </>
+        </Container>
     );
 }

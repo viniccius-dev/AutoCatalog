@@ -29,7 +29,7 @@ export const Form = styled.form`
 
         border-bottom-width: 1px;
         border-bottom-style: solid;
-        border-bottom-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+        border-bottom-color: ${({ theme }) => theme.COLORS.BLUE_300};
 
         h1 {
             color: ${({ theme }) => theme.COLORS.BLUE_100};
@@ -41,10 +41,33 @@ export const Form = styled.form`
         }
     }
 
+    > button {
+        width: 100%;
+    }
+`;
+
+export const Section = styled.div`
+    display: grid;
+    grid-template-columns: 105px auto 300px;
+    column-gap: 10px;
+    grid-template-areas:
+    "img-brand brand brand"
+    "img-brand new-brand new-brand"
+    "img-vehicle vehicle vehicle"
+    "img-vehicle year year"
+    "price price velocity"
+    "km-l km-l tank-capacity"
+    "trunk-capacity trunk-capacity weight";
+
+    margin-top: 20px;
+
     > label {
-        display: inline-block;
-        width: 48px;
-        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 109px;
+        height: 109px;
 
         background-color: ${({ theme }) => theme.COLORS.GRAY_100};
 
@@ -55,26 +78,73 @@ export const Form = styled.form`
 
         cursor: pointer;
 
-        > svg {    
-            margin: 15px;
-            color: ${({ theme }) => theme.COLORS.WHITE};
+        > span {
+            font-size: 15px;
+            text-align: center;
+            color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
         }
 
         > img {
             border-radius: 6px;
-            width: 46px;
-            height: 46px;
+            width: 105px;
+            height: 105px;
             object-fit: cover;
         }
 
         > input {
             display: none;
+
+            &:disabled #img-brand {
+                cursor: default;
+            }
         }
     }
 
-    .disabled {
-        background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
-        color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
-        cursor: default;
+    > label:nth-of-type(1) {
+        grid-area: img-brand;
+    }
+
+    > label:nth-of-type(2) {
+        grid-area: img-vehicle;
+    }
+
+    > div:nth-of-type(1) {
+        grid-area: brand;
+    }
+
+    > div:nth-of-type(2) {
+        grid-area: new-brand;
+    }
+
+    > div:nth-of-type(3) {
+        grid-area: vehicle;
+    }
+
+    > div:nth-of-type(4) {
+        grid-area: year;
+    }
+
+    > div:nth-of-type(5) {
+        grid-area: price;
+    }
+
+    > div:nth-of-type(6) {
+        grid-area: velocity;
+    }
+
+    > div:nth-of-type(7) {
+        grid-area: km-l;
+    }
+
+    > div:nth-of-type(8) {
+        grid-area: tank-capacity;
+    }
+
+    > div:nth-of-type(9) {
+        grid-area: trunk-capacity;
+    }
+
+    > div:nth-of-type(10) {
+        grid-area: weight;
     }
 `;

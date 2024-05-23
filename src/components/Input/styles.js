@@ -20,9 +20,21 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.WHITE};
         background: transparent;
         border: 0;
+        border-radius: 10px;
 
         &::placeholder {
             color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+        }
+
+        &:disabled {
+            background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+            border-width: 1px;
+            border-style: dashed;
+            border-color: ${({ theme }) => theme.COLORS.GRAY_100};
+        }
+
+        &:disabled::placeholder {
+            color: ${({ theme }) => theme.COLORS.GRAY_300};
         }
     }
 

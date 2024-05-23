@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+    position: relative;
+    user-select: none;
+    margin-bottom: 8px;
+`;
+
 export const SelectButton = styled.div`
     display: flex;
     padding: 0.75rem;
@@ -17,12 +23,15 @@ export const Chevrons = styled.div`
 `;
 
 export const OptionsList = styled.div`
+    position: absolute;
+    width: 100%;
+
     max-height: 200px;
     overflow-y: auto;
 
     margin-top: 0.25rem;
     border-radius: 10px;
-    background-color: ${({ theme }) => theme.COLORS.GRAY_100};
+    background-color: ${({ theme }) => theme.COLORS.BLUE_200};
     color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
