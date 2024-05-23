@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
-export function Card({ title, img, ...rest }) {
+export function Card({ title, img, onClick, ...rest }) {
     return (
-        <Container>
+        <Container onClick={onClick}>
             <h3>{title}</h3>
             <img src={img} {...rest}/>
         </Container>

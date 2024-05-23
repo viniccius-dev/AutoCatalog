@@ -67,7 +67,59 @@ const API = {
         }
     
         return await response.json();
+    },
+
+    createVehicle: async (formData) => {
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/addcar', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData 
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
+    renderBrands:async () => {
+        const response = await fetch(ApiBase + '/renderbrands', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
+    renderCars:async () => {
+        const response = await fetch(ApiBase + '/rendercars', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
     }
+
 
 
 
