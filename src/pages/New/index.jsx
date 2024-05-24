@@ -49,10 +49,9 @@ export function New() {
     };
 
     const handleSelect = (option) => {
-        console.log('Selected option:', option);
+        // console.log('Selected option:', option);
         setSelectedOption(option);
         setImgBrandPreview(`${imagePath}${option.img}`);
-        console.log(`${imagePath}${option.img}`);
 
         // Desabilite os inputs referenciados
         if (imgBrandRef.current) {
@@ -91,7 +90,8 @@ export function New() {
             setShowMessage(true);
             setTimeout(() => {
                 setShowMessage(false);
-            }, 5000);
+                location.reload();
+            }, 2000);
     
             if(response.status === 'error') {
                 return;

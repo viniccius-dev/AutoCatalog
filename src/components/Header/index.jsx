@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Container, Wrapper } from './styles.js';
 
 import storage from '../../helpers/storage.js';
@@ -12,7 +14,9 @@ export function Header() {
     return (
         <Container>
             <Wrapper>
-                <h1>AutoCatalog</h1>
+                <Link to="/">
+                    <h1>AutoCatalog</h1>
+                </Link>
 
                 {profile ? <LoggedUser /> : <LoggedOutUser />}
 

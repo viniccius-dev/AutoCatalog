@@ -23,6 +23,10 @@ export const Wrapper = styled.div`
 
     padding: 0 5%;
 
+    > a {
+        color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    }
+
     > img {
         width: 100px;
         height: 75px;
