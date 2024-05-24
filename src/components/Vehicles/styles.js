@@ -64,11 +64,9 @@ export const Content = styled.div`
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 15px;
 
+    background-color: ${({ theme }) => theme.BACKGROUND_LINEAR_GRADIENT};
+
     padding: 20px;
 
     overflow-y: auto;
-
-    > div img {
-        width: 175px;
-    }
 `;

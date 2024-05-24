@@ -3,24 +3,23 @@ import { FiX } from 'react-icons/fi';
 import { Background, Container, Content } from './styles';
 import { Card } from '../../components/Card';
 
-import imgVec from '../../assets/corsa.png'
+export function Vehicles({ closeModal, cars }) {
 
-export function Vehicles({ closeModal }) {
+    const imagePathCar = "http://localhost/projeto/backend/public/media/vehicle/";
+
     return (
         <Background>
             <Container>
                 
                 <header>
-                    <h3>Chevrolet-RM</h3>
+                    <h3>{cars[0].Brand}</h3>
                     <FiX onClick={closeModal} />
                 </header>
 
                 <Content>
-                    <Card title="Corsa" img={imgVec} alt="vehicle" />
-                    <Card title="Corsa" img={imgVec} alt="vehicle" />
-                    <Card title="Corsa" img={imgVec} alt="vehicle" />
-                    <Card title="Corsa" img={imgVec} alt="vehicle" />
-                    <Card title="Corsa" img={imgVec} alt="vehicle" />
+                    {cars.map(car => (
+                        <Card key={car.id} title={car.VehName} img={`${imagePathCar}${car.VehImg}`} alt="vehicle" />
+                    ))}
                 </Content>
 
             </Container>

@@ -33,7 +33,7 @@ export function New() {
                 const data = await API.renderBrands();
                 setOptions(data.brands);
             } catch (error) {
-                console.log('Erro ao buscar dados das marcas:', error);
+                console.error('Erro ao buscar dados das marcas:', error);
             }
         };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Container } from './styles';
 
@@ -6,39 +6,61 @@ import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 import { Vehicles } from '../../components/Vehicles';
 
-import VwImg from '../../assets/Volkswagen.png'
-import GmImg from '../../assets/Chevrolet.png'
+import API from '../../helpers/api';
 
 export function Home() {
     const [isOpen, setIsOpen] = useState(false);
 
-    const openModal = () => {
+    const [brands, setBrands] = useState([]);
+    const [cars, setCars] = useState([]);
+
+    const [selectedBrandId, setSelectedBrandId] = useState(null);
+
+    const imagePathBrand = "http://localhost/projeto/backend/public/media/brand/";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const dataBrands = await API.renderBrands();
+                const dataCars = await API.renderCars();
+                setBrands(dataBrands.brands);
+                setCars(dataCars.cars);
+            } catch {
+                console.error('Erro ao buscar dados das marcas:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const openModal = (brandName) => {
+        setSelectedBrandId(brandName);
         setIsOpen(true);
     };
 
     const closeModal = () => {
         setIsOpen(false);
+        setSelectedBrandId(null);
     };
+
+    const filteredCars = cars.filter(car => car.Brand === selectedBrandId);
 
     return (
         <Container>
             <Header />
                 <main>
-                    <Card onClick={openModal} title="Volkswagen" img={VwImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
-                    <Card title="Volkswagen" img={VwImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
-                    <Card title="Volkswagen" img={VwImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
-                    <Card title="Volkswagen" img={VwImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
-                    <Card title="Volkswagen" img={VwImg} alt="Marca" />
-                    <Card title="Chevrolet-GM" img={GmImg} alt="Marca" />
+                    {brands.map(brand => (
+                        <Card 
+                            key={brand.id} 
+                            onClick={() => openModal(brand.name)} 
+                            title={brand.name} 
+                            img={`${imagePathBrand}${brand.img}`} 
+                            alt="Marca" 
+                        />
+                    ))}
                 </main>
 
-                {isOpen && <Vehicles closeModal={closeModal} />}
+                {isOpen && <Vehicles cars={filteredCars} closeModal={closeModal} />}
         </Container>
     );
 }
