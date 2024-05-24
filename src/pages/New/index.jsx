@@ -1,6 +1,6 @@
 import { Container, Form, Section } from './styles';
 import { Link } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import API from '../../helpers/api'; // Importe a API
@@ -9,18 +9,36 @@ import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 import { InputSelect } from '../../components/InputSelect';
 import { Button } from '../../components/Button';
+import { DisplayMessage } from '../../components/DisplayMessage';
 
 export function New() {
 
-    const options = [];
-
+    const imagePath = "http://localhost/projeto/backend/public/media/brand/";
+    
     const imgBrandRef = useRef(null);
     const newBrandRef = useRef(null);
 
+    const [options, setOptions] = useState([]);
     const [imgBrandPreview, setImgBrandPreview] = useState(null);
     const [imgVehiclePreview, setImgVehiclePreview] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
 
+    const [type, setType] = useState("");
+    const [message, setMessage] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await API.renderBrands();
+                setOptions(data.brands);
+            } catch (error) {
+                console.log('Erro ao buscar dados das marcas:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleImageChange = (e, setImagePreview) => {
         const file = e.target.files[0];
@@ -33,6 +51,8 @@ export function New() {
     const handleSelect = (option) => {
         console.log('Selected option:', option);
         setSelectedOption(option);
+        setImgBrandPreview(`${imagePath}${option.img}`);
+        console.log(`${imagePath}${option.img}`);
 
         // Desabilite os inputs referenciados
         if (imgBrandRef.current) {
@@ -48,7 +68,9 @@ export function New() {
 
         const formData = new FormData();
 
-        formData.append('brandImage', imgBrandRef.current.files[0]);
+        if(selectedOption === null) {
+            formData.append('brandImage', imgBrandRef.current.files[0]);
+        }
         formData.append('vehicleImage', document.querySelector('#vehicle').files[0]);
         formData.append('brand', selectedOption ? selectedOption.name : newBrandRef.current.value);
         formData.append('vehicleName', e.target.vehicleName.value);
@@ -61,7 +83,19 @@ export function New() {
         formData.append('weight', e.target.weight.value);
 
         try {
-            await API.createVehicle(formData);
+            const response = await API.createVehicle(formData);
+
+            setType(response.status);
+            setMessage(response.message);
+    
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 5000);
+    
+            if(response.status === 'error') {
+                return;
+            }
         } catch (error) {
             console.error('Erro ao criar veículo:', error);
         }
@@ -111,19 +145,22 @@ export function New() {
                                 id="vehicle" 
                                 type="file"
                                 onChange={(e) => handleImageChange(e, setImgVehiclePreview)}
+                                required
                             />
                         </label>
 
-                        <Input name="vehicleName" placeholder="Nome do veículo" />
-                        <Input name="year" placeholder="Ano" />
-                        <Input name="price" placeholder="Preço" />
-                        <Input name="velocity" placeholder="Tempo de 0 a 100 km/h" />
+                        <Input name="vehicleName" placeholder="Nome do veículo" required />
+                        <Input name="year" placeholder="Ano" required />
+                        <Input name="price" placeholder="Preço" required />
+                        <Input name="velocity" placeholder="Tempo de 0 a 100 km/h" required />
                         <Input name="consumption" placeholder="Consumo médio" />
-                        <Input name="tankCapacity" placeholder="Cap. do tanque de combustível" />
-                        <Input name="trunkCapacity" placeholder="Cap. do porta malas" />
-                        <Input name="weight" placeholder="Peso (Kg)" />
+                        <Input name="tankCapacity" placeholder="Cap. do tanque de combustível" required />
+                        <Input name="trunkCapacity" placeholder="Cap. do porta malas" required />
+                        <Input name="weight" placeholder="Peso (Kg)" required />
 
                     </Section>
+
+                    {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
 
                     <Button title="Cadastrar" $border="true" />
                     

@@ -21,25 +21,29 @@ export function SignIn() {
     const [showMessage, setShowMessage] = useState(false);
 
     const onSubmit = async (e) => {
-        const data = await API.login(e);
+        try {
+            const data = await API.login(e);
 
-        if(data.status === 'success'){
-            const {token, ...profile} = data;
-            storage.save("token", token);
-            storage.save("profile", profile);
+            if(data.status === 'success'){
+                const {token, ...profile} = data;
+                storage.save("token", token);
+                storage.save("profile", profile);
+                
+                closeModal();
+                location.reload();
+                return;
+            }
+
+            setType(data.status);
+            setMessage(data.message);
             
-            closeModal();
-            location.reload();
-            return;
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 5000);
+        } catch (error) {
+            console.error('Erro ao tentar logar:', error);
         }
-
-        setType(data.status);
-        setMessage(data.message);
-        
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 5000);
     }
     
     return (

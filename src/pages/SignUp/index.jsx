@@ -34,19 +34,25 @@ export function SignUp() {
             return;
         }
 
-        const data = await API.createaccount(e);
+        try {
 
-        setType(data.status);
-        setMessage(data.message);
-            
-        setShowMessage(true);
-        setTimeout(() => {
-            if(data.status === 'success') {
-                window.location.href ="/"
-            }
-            
-            setShowMessage(false);
-        }, 5000);
+            const data = await API.createaccount(e);
+
+            setType(data.status);
+            setMessage(data.message);
+                
+            setShowMessage(true);
+            setTimeout(() => {
+                if(data.status === 'success') {
+                    window.location.href ="/"
+                }
+                
+                setShowMessage(false);
+            }, 5000);
+
+        } catch (error) {
+            console.error('Erro ao tentar cadastrar usuário:', error);
+        }
     }
 
     return(

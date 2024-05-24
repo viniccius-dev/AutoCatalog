@@ -96,12 +96,8 @@ const API = {
             },
         });
     
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message);
-        }
-    
-        return await response.json();
+        const json = await response.json();
+        return json;
     },
 
     renderCars:async () => {
@@ -112,12 +108,8 @@ const API = {
             },
         });
     
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message);
-        }
-    
-        return await response.json();
+        const json = await response.json();
+        return json;
     }
 
 

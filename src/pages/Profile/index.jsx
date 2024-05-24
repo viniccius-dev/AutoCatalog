@@ -43,23 +43,27 @@ export function Profile() {
             formData.append('avatar', avatarFile);
         }
 
-        const response = await API.updateaccount(formData);
+        try {
+            const response = await API.updateaccount(formData);
 
-        setType(response.status);
-        setMessage(response.message);
-
-        
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 5000);
-
-        if(response.status === 'error') {
-            return;
+            setType(response.status);
+            setMessage(response.message);
+    
+            
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 5000);
+    
+            if(response.status === 'error') {
+                return;
+            }
+    
+            storage.removeItem("profile");
+            storage.save("profile", response);
+        } catch (error) {
+            console.error('Erro ao editar os dados:', error);
         }
-
-        storage.removeItem("profile");
-        storage.save("profile", response);
     }
 
     const handleAvatarChange = (event) => {
