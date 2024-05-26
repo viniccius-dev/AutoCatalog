@@ -7,11 +7,14 @@ export const Container = styled.table`
     letter-spacing: 1px;
 
     > caption {
-        background-color: rgb(228 240 245);
+        font-size: 22px;
+        font-weight: 500;
+        background-color: ${({ theme }) => theme.COLORS.BLUE_100};
+        color: ${({ theme }) => theme.COLORS.WHITE};
     }
 
     th, td {
-        border: 1px solid rgb(160 160 160);
+        border: ${({ theme }) => `1px solid ${theme.COLORS.BLUE_100}`};
         padding: 8px 10px;
     }
 
@@ -19,7 +22,11 @@ export const Container = styled.table`
         text-align: center;
     }
 
+    tbody > tr {
+        background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+    }
+
     tbody > tr:nth-of-type(even) {
-        background-color: rgb(237 238 242);
+        background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
     }
 `;
