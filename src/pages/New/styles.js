@@ -56,8 +56,11 @@ export const Section = styled.div`
     "img-vehicle vehicle vehicle"
     "img-vehicle year year"
     "price price velocity"
-    "km-l km-l tank-capacity"
-    "trunk-capacity trunk-capacity weight";
+    "trunk-capacity trunk-capacity weight"
+    "fuel fuel tank-capacity"
+    "km-l-a km-l-a km-l-g"
+    "autonomy-alcohol autonomy-alcohol autonomy-gasoline"
+    "autonomy-eletric autonomy-eletric autonomy-eletric";
 
     margin-top: 20px;
 
@@ -133,18 +136,38 @@ export const Section = styled.div`
     }
 
     > div:nth-of-type(7) {
-        grid-area: km-l;
-    }
-
-    > div:nth-of-type(8) {
-        grid-area: tank-capacity;
-    }
-
-    > div:nth-of-type(9) {
         grid-area: trunk-capacity;
     }
 
-    > div:nth-of-type(10) {
+    > div:nth-of-type(8) {
         grid-area: weight;
+    }
+
+    > div:nth-of-type(9) {
+        grid-area: fuel;
+    }
+
+    > div:nth-of-type(10) {
+        grid-area: tank-capacity;
+    }
+
+    > div:nth-of-type(11) {
+        grid-area: km-l-a;
+    }
+    
+    > div:nth-of-type(12) {
+        grid-area: km-l-g;
+    }
+
+    > div:nth-of-type(13) {
+        grid-area: autonomy-alcohol;
+    }
+
+    > div:nth-of-type(14) {
+        grid-area: autonomy-gasoline;
+    }
+
+    > div:nth-of-type(15) {
+        grid-area: autonomy-eletric;
     }
 `;

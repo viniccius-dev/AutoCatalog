@@ -1,7 +1,6 @@
 import { Container, Form, Section } from './styles';
 import { Link } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useRef, useState, useEffect,  useCallback } from 'react';
 
 import API from '../../helpers/api'; // Importe a API
 
@@ -14,72 +13,103 @@ import { DisplayMessage } from '../../components/DisplayMessage';
 export function New() {
 
     const imagePath = "http://localhost/projeto/backend/public/media/brand/";
+    const optionsFuel = [
+        {id: 1, name: 'Combustão'},
+        {id: 2, name: 'Elétrico'},
+        {id: 3, name: 'Híbrido'}
+    ]
     
     const imgBrandRef = useRef(null);
     const newBrandRef = useRef(null);
+    const tankCapacityRef = useRef(null);
+    const consumptionAlcoholRef = useRef(null);
+    const consumptionGasolineRef = useRef(null);
+    const autonomyAlcoholRef = useRef(null);
+    const autonomyGasolineRef = useRef(null);
+    const autonomyEletricRef = useRef(null);
 
-    const [options, setOptions] = useState([]);
+    const [optionsBrands, setOptionsBrands] = useState([]);
+    const [selectedOptionBrand, setSelectedOptionBrand] = useState(null);
     const [imgBrandPreview, setImgBrandPreview] = useState(null);
     const [imgVehiclePreview, setImgVehiclePreview] = useState(null);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOptionFuel, setSelectedOptionFuel] = useState(null);
+    const [autonomyAlcohol, setAutonomyAlcohol] = useState(null);
+    const [autonomyGasoline, setAutonomyGasoline] = useState(null);
 
     const [type, setType] = useState("");
     const [message, setMessage] = useState("");
     const [showMessage, setShowMessage] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await API.renderBrands();
-                setOptions(data.brands);
-            } catch (error) {
-                console.error('Erro ao buscar dados das marcas:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const handleImageChange = (e, setImagePreview) => {
+    const handleImageChange = useCallback((e, setImagePreview) => {
         const file = e.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setImagePreview(imageUrl);
         }
-    };
+    }, []);
 
-    const handleSelect = (option) => {
-        // console.log('Selected option:', option);
-        setSelectedOption(option);
+    const handleSelectBrand = useCallback((option) => {
+        setSelectedOptionBrand(option);
         setImgBrandPreview(`${imagePath}${option.img}`);
 
-        // Desabilite os inputs referenciados
-        if (imgBrandRef.current) {
-            imgBrandRef.current.disabled = true;
+        imgBrandRef.current.disabled = true;
+        newBrandRef.current.disabled = true;
+        newBrandRef.current.value = "";
+    }, []);
+
+    const handleSelectFuel = useCallback((option) => {
+        const optionValue = option.name;
+        setSelectedOptionFuel(optionValue);
+
+        if (optionValue === 'Combustão') {
+            autonomyEletricRef.current.disabled = true;
+            autonomyEletricRef.current.value = "";
+            tankCapacityRef.current.disabled = false;
+            consumptionAlcoholRef.current.disabled = false;
+            consumptionGasolineRef.current.disabled = false;
+        } else if (optionValue === 'Elétrico') {
+            tankCapacityRef.current.disabled = true;
+            consumptionAlcoholRef.current.disabled = true;
+            consumptionGasolineRef.current.disabled = true;
+            tankCapacityRef.current.value = "";
+            consumptionAlcoholRef.current.value = "";
+            consumptionGasolineRef.current.value = "";
+            autonomyEletricRef.current.disabled = false;
+        } else {
+            tankCapacityRef.current.disabled = false;
+            consumptionAlcoholRef.current.disabled = false;
+            consumptionGasolineRef.current.disabled = false;
+            autonomyEletricRef.current.disabled = false;
+            tankCapacityRef.current.value = "";
+            consumptionAlcoholRef.current.value = "";
+            consumptionGasolineRef.current.value = "";
+            autonomyEletricRef.current.value = "";
         }
-        if (newBrandRef.current) {
-            newBrandRef.current.disabled = true;
-        }
-    };
+    }, []);
     
     const onSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
 
-        if(selectedOption === null) {
+        if(selectedOptionBrand === null) {
             formData.append('brandImage', imgBrandRef.current.files[0]);
         }
         formData.append('vehicleImage', document.querySelector('#vehicle').files[0]);
-        formData.append('brand', selectedOption ? selectedOption.name : newBrandRef.current.value);
+        formData.append('brand', selectedOptionBrand ? selectedOptionBrand.name : newBrandRef.current.value);
         formData.append('vehicleName', e.target.vehicleName.value);
         formData.append('year', e.target.year.value);
         formData.append('price', e.target.price.value);
         formData.append('velocity', e.target.velocity.value);
-        formData.append('consumption', e.target.consumption.value);
-        formData.append('tankCapacity', e.target.tankCapacity.value);
         formData.append('trunkCapacity', e.target.trunkCapacity.value);
         formData.append('weight', e.target.weight.value);
+        formData.append('fuelType', selectedOptionFuel);
+        formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : e.target.tankCapacity.value);
+        formData.append('autonomyAlcohol', autonomyAlcoholRef.current.disabled ? 'N/A' : autonomyAlcoholRef.current.value);
+        formData.append('autonomyGasoline', autonomyGasolineRef.current.disabled ? 'N/A' : autonomyGasolineRef.current.value);
+        formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
+        formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value);
+        formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value);
 
         try {
             const response = await API.createVehicle(formData);
@@ -90,16 +120,87 @@ export function New() {
             setShowMessage(true);
             setTimeout(() => {
                 setShowMessage(false);
+                if(response.status === 'error') {
+                    return;
+                }
                 location.reload();
             }, 2000);
-    
-            if(response.status === 'error') {
-                return;
-            }
+
         } catch (error) {
-            console.error('Erro ao criar veículo:', error);
+
+            setType('error');
+
+            if(error.message) {
+                setMessage(error.message);
+            } else {
+                setMessage('Erro ao criar veículo.')
+            }
+    
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 2000);
         }
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await API.renderBrands();
+                setOptionsBrands(data.brands);
+            } catch (error) {
+                console.error('Erro ao buscar dados das marcas:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const updateAutonomy = () => {
+            const tankCapacity = parseFloat(tankCapacityRef.current.value.replace(',','.')) || 0;
+            const consumptionAlcohol = parseFloat(consumptionAlcoholRef.current.value.replace(',','.')) || 0;
+            const consumptionGasoline = parseFloat(consumptionGasolineRef.current.value.replace(',','.')) || 0;
+
+            if(tankCapacity > 0 && consumptionAlcohol > 0) {
+                setAutonomyAlcohol((tankCapacity * consumptionAlcohol).toFixed(2));
+            } else {
+                setAutonomyAlcohol(null);
+            }
+
+            if(tankCapacity > 0 && consumptionGasoline > 0) {
+                setAutonomyGasoline((tankCapacity * consumptionGasoline).toFixed(2));
+            } else {
+                setAutonomyGasoline(null);
+            }
+        };
+
+        const inputs = [
+            tankCapacityRef.current,
+            consumptionAlcoholRef.current,
+            consumptionGasolineRef.current,
+        ];
+
+        inputs.forEach(input => {
+            input.addEventListener('input', updateAutonomy);
+        });
+
+        return () => {
+            inputs.forEach(input => {
+                input.removeEventListener('input', updateAutonomy)
+            })
+        };
+    }, []);
+
+    useEffect(() => {
+        if(autonomyAlcoholRef.current) {
+            autonomyAlcoholRef.current.value = autonomyAlcohol || "";
+        }
+
+        if(autonomyGasolineRef.current) {
+            autonomyGasolineRef.current.value = autonomyGasoline || "";
+        }
+    }, [autonomyAlcohol, autonomyGasoline]);
 
     return (
         <Container>
@@ -129,7 +230,7 @@ export function New() {
                             />
                         </label>
 
-                        <InputSelect title="Selecione uma marca" group="marcas" options={options} onSelect={handleSelect} />
+                        <InputSelect title="Selecione uma marca" group="marcas" options={optionsBrands} onSelect={handleSelectBrand} />
 
                         <Input ref={newBrandRef} id="new-brand" placeholder="Adicione uma nova marca" />
 
@@ -141,11 +242,9 @@ export function New() {
                             )}
 
                             <input
-                                // disabled
                                 id="vehicle" 
                                 type="file"
                                 onChange={(e) => handleImageChange(e, setImgVehiclePreview)}
-                                required
                             />
                         </label>
 
@@ -153,10 +252,16 @@ export function New() {
                         <Input name="year" placeholder="Ano" required />
                         <Input name="price" placeholder="Preço" required />
                         <Input name="velocity" placeholder="Tempo de 0 a 100 km/h" required />
-                        <Input name="consumption" placeholder="Consumo médio" />
-                        <Input name="tankCapacity" placeholder="Cap. do tanque de combustível" required />
-                        <Input name="trunkCapacity" placeholder="Cap. do porta malas" required />
+                        <Input name="trunkCapacity" placeholder="Cap. do porta malas (L)" required />
                         <Input name="weight" placeholder="Peso (Kg)" required />
+
+                        <InputSelect title="Selecione o tipo de propulsão" group="fuel" options={optionsFuel} onSelect={handleSelectFuel} />
+                        <Input ref={tankCapacityRef} name="tankCapacity" placeholder="Cap. do tanque de combustível (L)" required disabled />
+                        <Input ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" required disabled />
+                        <Input ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" required disabled />
+                        <Input ref={autonomyAlcoholRef} name="autonomyAlcohol" placeholder="Autonomia - Km (Álcool)" disabled />
+                        <Input ref={autonomyGasolineRef} name="autonomyGasoline" placeholder="Autonomia - Km (Gasolina)" disabled />
+                        <Input ref={autonomyEletricRef} name="autonomyEletric" placeholder="Autonomia - Km (Elétrico)" required disabled />
 
                     </Section>
 

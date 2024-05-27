@@ -31,6 +31,7 @@ export const Container = styled.div`
             border-width: 1px;
             border-style: dashed;
             border-color: ${({ theme }) => theme.COLORS.GRAY_100};
+            color: ${({ theme }) => theme.COLORS.GRAY_300};
         }
 
         &:disabled::placeholder {
