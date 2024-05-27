@@ -7,7 +7,7 @@ import { Container, Form, Avatar, NoAvatar } from './styles';
 
 import storage from '../../helpers/storage';
 import API from '../../helpers/api';
-import Loggout from '../../utils/loggout';
+import Logout from '../../utils/logout';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
@@ -141,7 +141,7 @@ export function Profile() {
                 {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
 
                 <Button type="submit" $border="true" title="Salvar" />
-                <Button type="button" $border="true" title="Loggout" onClick={Loggout} />
+                <Button type="button" $border="true" title="Logout" onClick={Logout} />
             </Form>
         </Container>
     );

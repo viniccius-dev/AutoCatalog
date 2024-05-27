@@ -5,6 +5,7 @@ import { Home } from '../pages/Home';
 import { Profile } from '../pages/Profile';
 import { New } from '../pages/New';
 import { Info } from '../pages/Info';
+import { Search } from '../pages/Search';
 
 export function AppRoutes() {
     return (
@@ -15,6 +16,7 @@ export function AppRoutes() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/new" element={<New />} />
                 <Route path="/info" element={<Info />} />
+                <Route path="/search" element={<Search />} />
             </Routes>
         </BrowserRouter>
     );

@@ -12,6 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Background = styled.div`
+    grid-area: content;
     overflow-y: auto;
 
     background: url(${BackgroundImg}) no-repeat center center;
