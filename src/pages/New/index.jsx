@@ -155,13 +155,13 @@ export function New() {
             const consumptionGasoline = parseFloat(consumptionGasolineRef.current.value.replace(',','.')) || 0;
 
             if(tankCapacity > 0 && consumptionAlcohol > 0) {
-                setAutonomyAlcohol((tankCapacity * consumptionAlcohol).toFixed(2));
+                setAutonomyAlcohol((tankCapacity * consumptionAlcohol).toFixed());
             } else {
                 setAutonomyAlcohol(null);
             }
 
             if(tankCapacity > 0 && consumptionGasoline > 0) {
-                setAutonomyGasoline((tankCapacity * consumptionGasoline).toFixed(2));
+                setAutonomyGasoline((tankCapacity * consumptionGasoline).toFixed());
             } else {
                 setAutonomyGasoline(null);
             }

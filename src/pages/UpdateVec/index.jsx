@@ -18,14 +18,23 @@ export function UpdateVec() {
     ]
     
     const navigate = useNavigate();
-
+    
     const imgBrandRef = useRef(null);
     const imgVehicleRef = useRef(null);
+    const tankCapacityRef = useRef(null);
+    const consumptionAlcoholRef = useRef(null);
+    const consumptionGasolineRef = useRef(null);
+    const autonomyAlcoholRef = useRef(null);
+    const autonomyGasolineRef = useRef(null);
+    const autonomyEletricRef = useRef(null);
 
     const [imgBrandPreview, setImgBrandPreview] = useState(null);
     const [selectedOptionBrand, setSelectedOptionBrand] = useState(null);
     const [imgVehiclePreview, setImgVehiclePreview] = useState(null);
     const [selectedOptionVehicle, setSelectedOptionVehicle] = useState(null);
+    const [selectedOptionFuel, setSelectedOptionFuel] = useState(null);
+    const [autonomyAlcohol, setAutonomyAlcohol] = useState(null);
+    const [autonomyGasoline, setAutonomyGasoline] = useState(null);
 
     const [optionsBrands, setOptionsBrands] = useState([]);
     const [optionsVehicles, setOptionsVehicles] = useState([]);
@@ -58,6 +67,36 @@ export function UpdateVec() {
         setOptionsVehicles(filteredVehicles);
     }, [originalOptionsVehicles]);
 
+    const handleSelectFuel = useCallback((option) => {
+        const optionValue = option.name;
+        setSelectedOptionFuel(optionValue);
+
+        if (optionValue === 'Combustão') {
+            autonomyEletricRef.current.disabled = true;
+            autonomyEletricRef.current.value = "";
+            tankCapacityRef.current.disabled = false;
+            consumptionAlcoholRef.current.disabled = false;
+            consumptionGasolineRef.current.disabled = false;
+        } else if (optionValue === 'Elétrico') {
+            tankCapacityRef.current.disabled = true;
+            consumptionAlcoholRef.current.disabled = true;
+            consumptionGasolineRef.current.disabled = true;
+            tankCapacityRef.current.value = "";
+            consumptionAlcoholRef.current.value = "";
+            consumptionGasolineRef.current.value = "";
+            autonomyEletricRef.current.disabled = false;
+        } else {
+            tankCapacityRef.current.disabled = false;
+            consumptionAlcoholRef.current.disabled = false;
+            consumptionGasolineRef.current.disabled = false;
+            autonomyEletricRef.current.disabled = false;
+            tankCapacityRef.current.value = "";
+            consumptionAlcoholRef.current.value = "";
+            consumptionGasolineRef.current.value = "";
+            autonomyEletricRef.current.value = "";
+        }
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -78,6 +117,52 @@ export function UpdateVec() {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        const updateAutonomy = () => {
+            const tankCapacity = parseFloat(tankCapacityRef.current.value.replace(',','.')) || 0;
+            const consumptionAlcohol = parseFloat(consumptionAlcoholRef.current.value.replace(',','.')) || 0;
+            const consumptionGasoline = parseFloat(consumptionGasolineRef.current.value.replace(',','.')) || 0;
+
+            if(tankCapacity > 0 && consumptionAlcohol > 0) {
+                setAutonomyAlcohol((tankCapacity * consumptionAlcohol).toFixed());
+            } else {
+                setAutonomyAlcohol(null);
+            }
+
+            if(tankCapacity > 0 && consumptionGasoline > 0) {
+                setAutonomyGasoline((tankCapacity * consumptionGasoline).toFixed());
+            } else {
+                setAutonomyGasoline(null);
+            }
+        };
+
+        const inputs = [
+            tankCapacityRef.current,
+            consumptionAlcoholRef.current,
+            consumptionGasolineRef.current,
+        ];
+
+        inputs.forEach(input => {
+            input.addEventListener('input', updateAutonomy);
+        });
+
+        return () => {
+            inputs.forEach(input => {
+                input.removeEventListener('input', updateAutonomy)
+            })
+        };
+    }, []);
+
+    useEffect(() => {
+        if(autonomyAlcoholRef.current) {
+            autonomyAlcoholRef.current.value = autonomyAlcohol || "";
+        }
+
+        if(autonomyGasolineRef.current) {
+            autonomyGasolineRef.current.value = autonomyGasoline || "";
+        }
+    }, [autonomyAlcohol, autonomyGasoline]);
 
     return(
         <Container>
@@ -112,6 +197,7 @@ export function UpdateVec() {
                         <Input name="nameBrand" placeholder="Atualizar o nome da marca" />
 
                         <Button title="Atualizar" $border="true" />
+                        <Button title="Deletar" $border="true" />
                     </UpdateBrand>
                 </Form>
 
@@ -146,8 +232,16 @@ export function UpdateVec() {
                         <Input name="trunkCapacity" placeholder="Atualizar cap. do porta malas (L)" />
                         <Input name="weight" placeholder="Atualizar peso (Kg)" />
 
-                        
+                        <InputSelect title="Atualize o tipo de propulsão" group="fuel" options={optionsFuel} onSelect={handleSelectFuel} />
+                        <Input ref={tankCapacityRef} name="tankCapacity" placeholder="Cap. do tanque de combustível (L)" required disabled />
+                        <Input ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" required disabled />
+                        <Input ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" required disabled />
+                        <Input ref={autonomyAlcoholRef} name="autonomyAlcohol" placeholder="Autonomia - Km (Álcool)" disabled />
+                        <Input ref={autonomyGasolineRef} name="autonomyGasoline" placeholder="Autonomia - Km (Gasolina)" disabled />
+                        <Input ref={autonomyEletricRef} name="autonomyEletric" placeholder="Autonomia - Km (Elétrico)" required disabled />
 
+                        <Button title="Atualizar" $border="true" />
+                        <Button title="Deletar" $border="true" />
                     </UpdateVehicle>
                 </Form>
             </main>

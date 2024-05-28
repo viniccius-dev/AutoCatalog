@@ -21,8 +21,12 @@ export const Container = styled.div`
 
         margin-top: 20px;
 
-        button {
-            grid-area: btn;
+        button:nth-of-type(1) {
+            grid-area: btnUpdate;
+        }
+
+        button:nth-of-type(2) {
+            grid-area: btnDelete;
         }
     }
 `;
@@ -102,7 +106,7 @@ export const UpdateBrand = styled.section`
     grid-template-areas:
     "img-brand brand brand"
     "img-brand name-brand name-brand"
-    "btn btn btn";
+    "btnUpdate btnUpdate btnDelete";
 
     > label:nth-of-type(1) {
         grid-area: img-brand;
@@ -119,4 +123,79 @@ export const UpdateBrand = styled.section`
 
 export const UpdateVehicle = styled.section`
     grid-template-columns: 105px auto 300px;
+    grid-template-areas:
+    "img-car filter-brand filter-brand"
+    "img-car car car"
+    "name-car name-car year"
+    "price price velocity"
+    "trunk-capacity trunk-capacity weight"
+    "fuel fuel tank-capacity"
+    "km-l-a km-l-a km-l-g"
+    "autonomy-alcohol autonomy-alcohol autonomy-gasoline"
+    "autonomy-eletric autonomy-eletric autonomy-eletric"
+    "btnUpdate btnUpdate btnDelete";
+
+    > label {
+        grid-area: img-car;
+    }
+
+    > div:nth-of-type(1) {
+        grid-area: filter-brand;
+    }
+
+    > div:nth-of-type(2) {
+        grid-area: car;
+    }
+
+    > div:nth-of-type(3) {
+        grid-area: name-car;
+    }
+
+    > div:nth-of-type(4) {
+        grid-area: year;
+    }
+
+    > div:nth-of-type(5) {
+        grid-area: price;
+    }
+
+    > div:nth-of-type(6) {
+        grid-area: velocity;
+    }
+
+    > div:nth-of-type(7) {
+        grid-area: trunk-capacity;
+    }
+
+    > div:nth-of-type(8) {
+        grid-area: weight;
+    }
+
+    > div:nth-of-type(9) {
+        grid-area: fuel;
+    }
+
+    > div:nth-of-type(10) {
+        grid-area: tank-capacity;
+    }
+
+    > div:nth-of-type(11) {
+        grid-area: km-l-a;
+    }
+    
+    > div:nth-of-type(12) {
+        grid-area: km-l-g;
+    }
+
+    > div:nth-of-type(13) {
+        grid-area: autonomy-alcohol;
+    }
+
+    > div:nth-of-type(14) {
+        grid-area: autonomy-gasoline;
+    }
+
+    > div:nth-of-type(15) {
+        grid-area: autonomy-eletric;
+    }
 `;

@@ -23,6 +23,7 @@ export const Chevrons = styled.div`
 `;
 
 export const OptionsList = styled.div`
+    z-index: 2;
     position: absolute;
     width: 100%;
 
