@@ -20,6 +20,11 @@ export const Container = styled.div`
             color: ${({ theme }) => theme.COLORS.BLUE_100};
             font-size: 24px;
         }
+
+        button {
+            border: none;
+            background: none;
+        }
     }
 `;
 

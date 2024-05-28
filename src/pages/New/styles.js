@@ -35,9 +35,11 @@ export const Form = styled.form`
             color: ${({ theme }) => theme.COLORS.BLUE_100};
         }
 
-        a {
+        button {
             font-size: 20px;
             color: ${({ theme }) => theme.COLORS.BLUE_300};
+            background: none;
+            border: none;
         }
     }
 

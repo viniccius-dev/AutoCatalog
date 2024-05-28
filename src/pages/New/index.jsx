@@ -1,5 +1,5 @@
 import { Container, Form, Section } from './styles';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect,  useCallback } from 'react';
 
 import API from '../../helpers/api'; // Importe a API
@@ -18,6 +18,8 @@ export function New() {
         {id: 2, name: 'Elétrico'},
         {id: 3, name: 'Híbrido'}
     ]
+
+    const navigate = useNavigate();
     
     const imgBrandRef = useRef(null);
     const newBrandRef = useRef(null);
@@ -39,6 +41,10 @@ export function New() {
     const [type, setType] = useState("");
     const [message, setMessage] = useState("");
     const [showMessage, setShowMessage] = useState(false);
+
+    const handleBack = () => {
+        navigate(-1);
+    }
 
     const handleImageChange = useCallback((e, setImagePreview) => {
         const file = e.target.files[0];
@@ -210,7 +216,7 @@ export function New() {
                 <Form onSubmit={onSubmit}>
                     <header>
                         <h1>Adicionar veículo</h1>
-                        <Link to="/">Voltar</Link>
+                        <button onClick={handleBack}>Voltar</button>
                     </header>
 
                     <Section>

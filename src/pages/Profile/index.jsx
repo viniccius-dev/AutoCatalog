@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
@@ -25,6 +25,12 @@ export function Profile() {
     const [showMessage, setShowMessage] = useState(false);
 
     const imagePath = "http://localhost/projeto/backend/public/media/user/"; // Defina o caminho da pasta de imagens no backend
+
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate(-1);
+    }
 
     useEffect(() => {
         if (profile.user.avatar) {
@@ -78,9 +84,9 @@ export function Profile() {
     return (
         <Container>
             <header> 
-                <Link to="/">
+                <button onClick={handleBack}>
                     <FiArrowLeft />
-                </Link>
+                </button>
             </header>
 
             <Form onSubmit={handleSubmit(onSubmit)} >
