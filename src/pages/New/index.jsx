@@ -2,7 +2,7 @@ import { Container, Form, Section } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect,  useCallback } from 'react';
 
-import API from '../../helpers/api'; // Importe a API
+import { API } from '../../helpers/api'; // Importe a API
 
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -150,19 +150,6 @@ export function New() {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await API.renderBrands();
-                setOptionsBrands(data.brands);
-            } catch (error) {
-                console.error('Erro ao buscar dados das marcas:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
         const updateAutonomy = () => {
             const tankCapacity = parseFloat(tankCapacityRef.current.value.replace(',','.')) || 0;
             const consumptionAlcohol = parseFloat(consumptionAlcoholRef.current.value.replace(',','.')) || 0;
@@ -208,6 +195,19 @@ export function New() {
         }
     }, [autonomyAlcohol, autonomyGasoline]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await API.renderBrands();
+                setOptionsBrands(data.brands);
+            } catch (error) {
+                console.error('Erro ao buscar dados das marcas:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <Container>
             <Header />
@@ -221,7 +221,12 @@ export function New() {
 
                     <Section>
 
-                        <label id="img-brand" htmlFor="brand">
+                        <label 
+                            htmlFor="brand" 
+                            className={
+                                imgBrandRef.current && imgBrandRef.current.disabled ? 'disabled' : ''
+                            }
+                        >
                             {imgBrandPreview ? (
                                 <img src={imgBrandPreview} alt="Imagem da marca" />
                             ) : (
@@ -236,7 +241,7 @@ export function New() {
                             />
                         </label>
 
-                        <InputSelect title="Selecione uma marca" group="marcas" options={optionsBrands} onSelect={handleSelectBrand} />
+                        <InputSelect title="Selecione uma marca" group="brands" options={optionsBrands} onSelect={handleSelectBrand} />
 
                         <Input ref={newBrandRef} id="new-brand" placeholder="Adicione uma nova marca" />
 

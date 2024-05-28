@@ -2,7 +2,7 @@ import { FiUser, FiPhoneCall, FiMail, FiLock } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-import API from '../../helpers/api';
+import { API } from '../../helpers/api';
 import { Container, Form, Background } from './styles';
 
 import { Input } from '../../components/Input';

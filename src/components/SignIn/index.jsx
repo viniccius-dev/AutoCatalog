@@ -9,7 +9,7 @@ import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 import { DisplayMessage } from '../DisplayMessage';
 
-import API from '../../helpers/api';
+import { API } from '../../helpers/api';
 import storage from '../../helpers/storage';
 import closeModal from '../../utils/toggleModal';
 

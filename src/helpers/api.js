@@ -119,4 +119,4 @@ const API = {
 
 
 
-export default API;
+export { API, ApiBase };

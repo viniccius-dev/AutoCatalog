@@ -48,7 +48,7 @@ export const Form = styled.form`
     }
 `;
 
-export const Section = styled.div`
+export const Section = styled.section`
     display: grid;
     grid-template-columns: 105px auto 300px;
     column-gap: 10px;
@@ -98,15 +98,15 @@ export const Section = styled.div`
 
         > input {
             display: none;
-
-            &:disabled #img-brand {
-                cursor: default;
-            }
         }
     }
 
     > label:nth-of-type(1) {
         grid-area: img-brand;
+    }
+
+    > label.disabled {
+        cursor: default;
     }
 
     > label:nth-of-type(2) {

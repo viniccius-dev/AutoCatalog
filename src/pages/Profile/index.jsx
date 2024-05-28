@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Container, Form, Avatar, NoAvatar } from './styles';
 
 import storage from '../../helpers/storage';
-import API from '../../helpers/api';
+import { API } from '../../helpers/api';
 import Logout from '../../utils/logout';
 
 import { Input } from '../../components/Input';

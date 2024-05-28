@@ -6,7 +6,7 @@ import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 import { Vehicles } from '../../components/Vehicles';
 
-import API from '../../helpers/api';
+import { API } from '../../helpers/api';
 
 export function Home() {
     const [isOpen, setIsOpen] = useState(false);
