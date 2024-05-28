@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Container, Form, Avatar, NoAvatar } from './styles';
 
 import storage from '../../helpers/storage';
-import { API } from '../../helpers/api';
+import { API, ApiBase } from '../../helpers/api';
 import Logout from '../../utils/logout';
 
 import { Input } from '../../components/Input';
@@ -24,8 +24,6 @@ export function Profile() {
     const [message, setMessage] = useState("");
     const [showMessage, setShowMessage] = useState(false);
 
-    const imagePath = "http://localhost/projeto/backend/public/media/user/"; // Defina o caminho da pasta de imagens no backend
-
     const navigate = useNavigate();
 
     const handleBack = () => {
@@ -34,7 +32,7 @@ export function Profile() {
 
     useEffect(() => {
         if (profile.user.avatar) {
-            setAvatarPreview(`${imagePath}${profile.user.avatar}`);
+            setAvatarPreview(`${ApiBase}/media/user/${profile.user.avatar}`);
         }
     }, [profile.user.avatar]);
 

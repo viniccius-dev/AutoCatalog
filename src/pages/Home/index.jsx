@@ -6,7 +6,7 @@ import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 import { Vehicles } from '../../components/Vehicles';
 
-import { API } from '../../helpers/api';
+import { API, ApiBase } from '../../helpers/api';
 
 export function Home() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +15,6 @@ export function Home() {
     const [cars, setCars] = useState([]);
 
     const [selectedBrandId, setSelectedBrandId] = useState(null);
-
-    const imagePathBrand = "http://localhost/projeto/backend/public/media/brand/";
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,7 +52,7 @@ export function Home() {
                             key={brand.id} 
                             onClick={() => openModal(brand.name)} 
                             title={brand.name} 
-                            img={`${imagePathBrand}${brand.img}`} 
+                            img={`${ApiBase}/media/brand/${brand.img}`} 
                             alt="Marca" 
                         />
                     ))}

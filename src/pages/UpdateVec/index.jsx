@@ -11,10 +11,15 @@ import { Button } from '../../components/Button';
 import { API, ApiBase } from '../../helpers/api';
 
 export function UpdateVec() {
+    const optionsFuel = [
+        {id: 1, name: 'Combustão'},
+        {id: 2, name: 'Elétrico'},
+        {id: 3, name: 'Híbrido'}
+    ]
+    
     const navigate = useNavigate();
 
     const imgBrandRef = useRef(null);
-    const nameBrandRef = useRef(null);
     const imgVehicleRef = useRef(null);
 
     const [imgBrandPreview, setImgBrandPreview] = useState(null);
@@ -104,7 +109,7 @@ export function UpdateVec() {
 
                         <InputSelect title="Selecione uma marca" group="marcas" options={optionsBrands} onSelect={handleSelectBrand} />
 
-                        <Input ref={nameBrandRef} id="new-brand" placeholder="Atualizar o nome da marca" />
+                        <Input name="nameBrand" placeholder="Atualizar o nome da marca" />
 
                         <Button title="Atualizar" $border="true" />
                     </UpdateBrand>
@@ -133,6 +138,16 @@ export function UpdateVec() {
 
                         <InputSelect title="Selecione uma marca" group="brands" options={optionsBrands} onSelect={handleFilterVehicles} />
                         <InputSelect title="Selecione uma veículo" group="vehicle" options={optionsVehicles} onSelect={handleSelectVehicle} />
+
+                        <Input name="vehicleName" placeholder="Atualizar nome" />
+                        <Input name="year" placeholder="Atualizar ano" />
+                        <Input name="price" placeholder="Atualizar preço" />
+                        <Input name="velocity" placeholder="Atualizar tempo de 0 a 100 km/h" />
+                        <Input name="trunkCapacity" placeholder="Atualizar cap. do porta malas (L)" />
+                        <Input name="weight" placeholder="Atualizar peso (Kg)" />
+
+                        
+
                     </UpdateVehicle>
                 </Form>
             </main>

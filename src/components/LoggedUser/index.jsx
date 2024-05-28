@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { Container, NoAvatar } from './styles';
 
+import { ApiBase } from '../../helpers/api';
+
 import storage from '../../helpers/storage';
 
 export function LoggedUser() {
     const profile = storage.get("profile");
-    const imagePath = "http://localhost/projeto/backend/public/media/user/";
 
     return (
         <Container>
@@ -29,7 +30,7 @@ export function LoggedUser() {
                     :
 
                     <img
-                        src={`${imagePath}${profile.user.avatar}`}
+                        src={`${ApiBase}/media/user/${profile.user.avatar}`}
                         alt="Foto do usuário"
                     />
                 }

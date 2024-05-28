@@ -2,7 +2,7 @@ import { Container, Form, Section } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect,  useCallback } from 'react';
 
-import { API } from '../../helpers/api'; // Importe a API
+import { API, ApiBase } from '../../helpers/api'; // Importe a API
 
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -12,7 +12,6 @@ import { DisplayMessage } from '../../components/DisplayMessage';
 
 export function New() {
 
-    const imagePath = "http://localhost/projeto/backend/public/media/brand/";
     const optionsFuel = [
         {id: 1, name: 'Combustão'},
         {id: 2, name: 'Elétrico'},
@@ -56,7 +55,7 @@ export function New() {
 
     const handleSelectBrand = useCallback((option) => {
         setSelectedOptionBrand(option);
-        setImgBrandPreview(`${imagePath}${option.img}`);
+        setImgBrandPreview(`${ApiBase}/media/brand/${option.img}`);
 
         imgBrandRef.current.disabled = true;
         newBrandRef.current.disabled = true;
