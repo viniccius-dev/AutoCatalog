@@ -29,13 +29,16 @@ export const Layer = styled.div`
 
 export const Content = styled.div`
     width: 700px;
+    max-height: 95%; 
     margin: 0 auto;
     padding: 50px;
+
+    overflow-y: auto;
 
     border-width: 1px;
     border-style: solid;
     border-color: ${({ theme }) => theme.COLORS.GRAY_100};
-    border-radius: 35px;
+    border-radius: 8px;
 
     background: ${({ theme }) => theme.COLORS.BACKGROUND_LINEAR_GRADIENT};
 
@@ -45,6 +48,7 @@ export const Content = styled.div`
     gap: 40px;
 
     > div {
+        height: 514px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

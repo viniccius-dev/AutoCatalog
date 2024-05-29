@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
             color: ${({ theme }) => theme.COLORS.BACKGROUND_700};
         }
 
-        .active {
+        a:hover, a.active {
             font-weight: 900;
         }
     }

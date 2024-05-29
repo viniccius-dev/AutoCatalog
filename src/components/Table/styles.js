@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.table`
     border-collapse: collapse;
     border: 1px solid rgb(140 140 140);
-    font-size: 18px;
+    font-size: 15px;
     letter-spacing: 1px;
 
     > caption {

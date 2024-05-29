@@ -30,7 +30,7 @@ export function Header() {
                         to="/search"
                         className={location.pathname === '/search' ? 'active' : ''}
                     >
-                        Procurar
+                        Pesquisar
                     </Link>
                     <Link 
                         to="/about"
