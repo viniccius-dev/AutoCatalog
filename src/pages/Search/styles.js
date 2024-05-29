@@ -32,6 +32,7 @@ export const Content = styled.div`
     justify-content: center;
     width: 1000px;
     height: 90%;
+    max-height: 836px;
     overflow-y: auto;
 
     margin: 0 auto;

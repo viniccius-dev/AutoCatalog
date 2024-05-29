@@ -27,6 +27,18 @@ export const Wrapper = styled.div`
         color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
     }
 
+    > div:first-of-type {
+        a {
+            padding: 0 10px;
+            font-size: 14px;
+            color: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+        }
+
+        .active {
+            font-weight: 900;
+        }
+    }
+
     > img {
         width: 100px;
         height: 75px;
