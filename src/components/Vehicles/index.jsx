@@ -17,7 +17,12 @@ export function Vehicles({ closeModal, cars }) {
 
                 <Content>
                     {cars.map(car => (
-                        <Card key={car.id} title={car.VehName} img={`${ApiBase}/media/vehicle/${car.VehImg}`} alt="vehicle" />
+                        <Card 
+                            key={car.id} 
+                            title={car.VehName} 
+                            img={`${ApiBase}/media/vehicle/${car.VehImg}`} 
+                            alt="vehicle" 
+                        />
                     ))}
                 </Content>
 

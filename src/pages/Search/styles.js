@@ -28,6 +28,8 @@ export const Layer = styled.div`
 `;
 
 export const Content = styled.div`
+    display: flex;
+    justify-content: center;
     width: 1000px;
     height: 90%;
     overflow-y: auto;
@@ -38,17 +40,41 @@ export const Content = styled.div`
     border-width: 1px;
     border-style: solid;
     border-color: ${({ theme }) => theme.COLORS.GRAY_100};
-    border-radius: 20px;
+    border-radius: 8px;
 
     background: ${({ theme }) => theme.COLORS.BACKGROUND_LINEAR_GRADIENT};
+
+    > section {
+        width: 630px;
+        min-height: 830px;
+
+        padding: 40px 0 40px 40px;
+
+        border-left: ${({ theme }) => `1px solid ${theme.COLORS.GRAY_100}`};
+
+        > h2 {
+            margin: 20px 0;
+        }
+
+        > main {
+            display: grid;
+            grid-auto-rows: 250px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+
+            padding-right: 10px;
+
+            height: 625px;
+
+            overflow-y: auto;
+        }
+    }
 `
 
 export const Filters = styled.nav`
     width: 280px;
 
     padding: 40px 40px 40px 0;
-
-    border-right: ${({ theme }) => `1px solid ${theme.COLORS.GRAY_100}`};
 
     > div {
         background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
@@ -66,6 +92,7 @@ export const Filters = styled.nav`
             border: none;
             background: transparent;
             margin-top: 10px;
+            color: ${({ theme }) => theme.COLORS.GRAY_300};
         }
     }
 
