@@ -95,6 +95,10 @@ export function New() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        if(selectedOptionFuel === null || imgVehiclePreview === null) {
+            return console.error('Favor inserir todas as informções solicitadas');
+        }
+
         const formData = new FormData();
 
         if(selectedOptionBrand === null) {
@@ -109,12 +113,18 @@ export function New() {
         formData.append('trunkCapacity', e.target.trunkCapacity.value);
         formData.append('weight', e.target.weight.value);
         formData.append('fuelType', selectedOptionFuel);
-        formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : e.target.tankCapacity.value);
-        formData.append('autonomyAlcohol', autonomyAlcoholRef.current.disabled ? 'N/A' : autonomyAlcoholRef.current.value);
-        formData.append('autonomyGasoline', autonomyGasolineRef.current.disabled ? 'N/A' : autonomyGasolineRef.current.value);
+        formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : tankCapacityRef.current.value);
+        formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value);
+        formData.append('autonomyGasoline', autonomyGasolineRef.current.value);
         formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
         formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value);
         formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value);
+
+        // for (let [key, value] of formData.entries()) {
+        //     console.log(`${key}: ${value}`);
+        // }
+
+        // return;
 
         try {
             const response = await API.createVehicle(formData);
@@ -265,7 +275,7 @@ export function New() {
                         <Input name="trunkCapacity" placeholder="Cap. do porta malas (L)" required />
                         <Input name="weight" placeholder="Peso (Kg)" required />
 
-                        <InputSelect title="Selecione o tipo de propulsão" group="fuel" options={optionsFuel} onSelect={handleSelectFuel} />
+                        <InputSelect title="Selecione o tipo de propulsão" group="fuel" options={optionsFuel} onSelect={handleSelectFuel} required />
                         <Input ref={tankCapacityRef} name="tankCapacity" placeholder="Cap. do tanque de combustível (L)" required disabled />
                         <Input ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" required disabled />
                         <Input ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" required disabled />
