@@ -1,10 +1,18 @@
 import { Container } from './styles';
 
-export function Table() {
+export function Table({ img }) {
     return(
         <Container>
             <caption>Ficha Técnica</caption>
             <tbody>
+                {
+                    img &&
+                    <tr>
+                        <td colSpan="2">
+                            <img src={img.VehImg} alt={img.VehName} />
+                        </td>
+                    </tr>
+                }            
                 <tr>
                     <th scope="row">Marca</th>
                     <td>Chevrolet</td>

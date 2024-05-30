@@ -18,6 +18,11 @@ export const Container = styled.table`
         padding: 8px 10px;
     }
 
+    td > img {
+        width: 150px;
+        height: 150px;
+    }
+
     td:last-of-type {
         text-align: center;
     }
