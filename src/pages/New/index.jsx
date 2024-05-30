@@ -109,7 +109,7 @@ export function New() {
         formData.append('vehicleName', e.target.vehicleName.value);
         formData.append('year', e.target.year.value);
         formData.append('price', e.target.price.value);
-        formData.append('velocity', e.target.velocity.value);
+        formData.append('velocity', e.target.velocity.value.replace(',', '.'));
         formData.append('trunkCapacity', e.target.trunkCapacity.value);
         formData.append('weight', e.target.weight.value);
         formData.append('fuelType', selectedOptionFuel);
@@ -117,8 +117,8 @@ export function New() {
         formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value);
         formData.append('autonomyGasoline', autonomyGasolineRef.current.value);
         formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
-        formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value);
-        formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value);
+        formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value.replace(',', '.'));
+        formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value.replace(',', '.'));
 
         // for (let [key, value] of formData.entries()) {
         //     console.log(`${key}: ${value}`);
@@ -277,8 +277,8 @@ export function New() {
 
                         <InputSelect title="Selecione o tipo de propulsão" group="fuel" options={optionsFuel} onSelect={handleSelectFuel} required />
                         <Input ref={tankCapacityRef} name="tankCapacity" placeholder="Cap. do tanque de combustível (L)" required disabled />
-                        <Input ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" required disabled />
-                        <Input ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" required disabled />
+                        <Input ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" disabled />
+                        <Input ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" disabled />
                         <Input ref={autonomyAlcoholRef} name="autonomyAlcohol" placeholder="Autonomia - Km (Álcool)" disabled />
                         <Input ref={autonomyGasolineRef} name="autonomyGasoline" placeholder="Autonomia - Km (Gasolina)" disabled />
                         <Input ref={autonomyEletricRef} name="autonomyEletric" placeholder="Autonomia - Km (Elétrico)" required disabled />

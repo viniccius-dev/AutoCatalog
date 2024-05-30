@@ -8,6 +8,7 @@ import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 import { InputSelect } from '../../components/InputSelect';
 import { Button } from '../../components/Button';
+import { DisplayMessage } from '../../components/DisplayMessage';
 
 import { API, ApiBase } from '../../helpers/api';
 
@@ -26,6 +27,7 @@ export function UpdateVec() {
 
     const imgBrandRef = useRef(null);
     const imgVehicleRef = useRef(null);
+    const velocityRef = useRef(null);
     const tankCapacityRef = useRef(null);
     const consumptionAlcoholRef = useRef(null);
     const consumptionGasolineRef = useRef(null);
@@ -162,14 +164,18 @@ export function UpdateVec() {
             }
         }
         
+        if(velocityRef.current){
+            formData.append('velocity', velocityRef.current.value.replace(',','.'));
+        }
+
         if(selectedOptionFuel !== null) {
             formData.append('fuelType', selectedOptionFuel);
             formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : tankCapacityRef.current.value);
             formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value);
             formData.append('autonomyGasoline', autonomyGasolineRef.current.value);
             formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
-            formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value);
-            formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value);
+            formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value.replace(',', '.'));
+            formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value.replace(',', '.'));
         }
         
     
@@ -228,7 +234,7 @@ export function UpdateVec() {
         const confirm = window.confirm("Deseja realmente deletar esse veículo? Os dados não poderão ser recuperados.");
 
         if(confirm) {
-            await API.deletevehicle(selectedOptionVehicle.id);
+            const response = await API.deletevehicle(selectedOptionVehicle.id);
 
             setType(response.status);
             setMessage(response.message);
@@ -315,9 +321,9 @@ export function UpdateVec() {
             <Header />
 
             <main>
-                {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
 
                 <Form onSubmit={handleSubmitBrand(updateBrand)}>
+                {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
                     <header>
                         <h1>Atualizar Marca</h1>
                         <button onClick={handleBack}>Voltar</button>
@@ -393,7 +399,7 @@ export function UpdateVec() {
                         <Input name="vehicleName" placeholder="Atualizar nome" {...registerVehicle("newName")} />
                         <Input name="year" placeholder="Atualizar ano" {...registerVehicle("year")} />
                         <Input name="price" placeholder="Atualizar preço" {...registerVehicle("price")} />
-                        <Input name="velocity" placeholder="Atualizar tempo de 0 a 100 km/h" {...registerVehicle("velocity")} />
+                        <Input name="velocity" placeholder="Atualizar tempo de 0 a 100 km/h" ref={velocityRef} />
                         <Input name="trunkCapacity" placeholder="Atualizar cap. do porta malas (L)" {...registerVehicle("trunkCapacity")} />
                         <Input name="weight" placeholder="Atualizar peso (Kg)" {...registerVehicle("weight")} />
 

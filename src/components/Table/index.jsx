@@ -1,8 +1,10 @@
 import { Container } from './styles';
 
+import { ApiBase } from '../../helpers/api';
+
 import { InputSelect } from '../InputSelect';
 
-export function Table({ title, list, img }) {
+export function Table({ title, list, img, data }) {
     return(
         <Container>
             {
@@ -10,7 +12,7 @@ export function Table({ title, list, img }) {
                     <thead>
                         <tr>
                             <td colSpan={2}>
-                                <InputSelect title="Celta" group="cars" options={list} />
+                                <InputSelect title="Celta" group="vehicle" options={list} />
                             </td>
                         </tr> 
                     </thead>
@@ -24,38 +26,38 @@ export function Table({ title, list, img }) {
                 {
                     img &&
                     <tr>
-                        <td colSpan="2">
-                            <img src={img.VehImg} alt={img.VehName} />
+                        <td colSpan="2" className="td-img">
+                            {data && <img src={`${ApiBase}/media/vehicle/${data.VehImg}`} alt={data.VehName} />}
                         </td>
                     </tr>
                 }            
                 <tr>
                     <th scope="row">Marca</th>
-                    <td>Chevrolet</td>
+                    <td>{data && data.Brand}</td>
                 </tr>
                 <tr>
                     <th scope="row">Ano</th>
-                    <td>2011</td>
+                    <td>{data && data.year}</td>
                 </tr>
                 <tr>
                     <th scope="row">Preço</th>
-                    <td>R$27.260</td>
+                    <td>{data && `R$ ${data.price}`}</td>
                 </tr>
                 <tr>
                     <th scope="row">Aceleração 0-100</th>
-                    <td>13,6 segundos</td>
+                    <td>{data && `${data.velocity} segundos`}</td>
                 </tr>
                 <tr>
                     <th scope="row">Cap. do porta malas</th>
-                    <td>250 Litros</td>
+                    <td>{data && `${data.trunkCapacity} Litros`}</td>
                 </tr>
                 <tr>
                     <th scope="row">Peso</th>
-                    <td>1.029 Kg</td>
+                    <td>{data && `${data.weight} Kg`}</td>
                 </tr>
                 <tr>
                     <th scope="row">Cap. do tanque</th>
-                    <td>44 Litros</td>
+                    <td>{data && `${data.tankCapacity} Litros`}</td>
                 </tr>
                 <tr>
                     <th scope="row">Consumo médio (A)</th>

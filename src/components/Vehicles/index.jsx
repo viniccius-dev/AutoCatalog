@@ -11,7 +11,7 @@ export function Vehicles({ closeModal, cars }) {
             <Container>
                 
                 <header>
-                    <h3>{cars[0].Brand}</h3>
+                    <h3>{cars.length > 0 && cars[0].Brand}</h3>
                     <FiX onClick={closeModal} />
                 </header>
 

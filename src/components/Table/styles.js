@@ -19,6 +19,11 @@ export const Container = styled.table`
     th, td {
         border: ${({ theme }) => `1px solid ${theme.COLORS.BLUE_100}`};
         padding: 8px 10px;
+        height: 57px;
+    }
+
+    .td-img {
+        height: 171px;
     }
 
     td > img {
@@ -31,6 +36,7 @@ export const Container = styled.table`
 
         div {
             background-color: ${({ theme }) => theme.COLORS.BLUE_100};
+            font-size: 19px;
 
             svg {
                 color: ${({ theme }) => theme.COLORS.WHITE};

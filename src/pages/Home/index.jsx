@@ -23,7 +23,7 @@ export function Home() {
                 const dataCars = await API.renderCars();
                 setBrands(dataBrands.brands);
                 setCars(dataCars.cars);
-            } catch {
+            } catch(error) {
                 console.error('Erro ao buscar dados das marcas:', error);
             }
         };

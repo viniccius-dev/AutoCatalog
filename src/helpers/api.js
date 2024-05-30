@@ -110,10 +110,89 @@ const API = {
     
         const json = await response.json();
         return json;
-    }
+    },
+
+    updatebrand: async (formData) => {
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/updatebrand', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData 
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
+    deletebrand: async (id) => {
 
 
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/deletebrand', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
 
+    updatevehicle: async (formData) => {
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/updatecar', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData 
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
+    deletevehicle: async (id) => {
+
+
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/deletecar', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
 
 };
 

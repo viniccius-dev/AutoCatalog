@@ -1,13 +1,16 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { useState, useEffect } from "react";
 
 import { Container, Content, Background, Layer } from './styles';
 
-import { API, ApiBase } from '../../helpers/api';
+import { API } from '../../helpers/api';
 
 import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
 
 export function Comparison() {
+    const [listCars, setListCars] = useState([]);
+
     const options = [
         {id: 1, name: 'Celta'},
         {id: 2, name: 'Corsa'}
@@ -59,6 +62,15 @@ export function Comparison() {
         }
     ]
 
+    useEffect(() => {
+        async function fetchVehicles() {
+            const response = await API.renderCars();
+            setListCars(response.cars);
+        }
+
+        fetchVehicles();
+    }, [])
+
     return (
         <Container>
             <Header />
@@ -72,7 +84,8 @@ export function Comparison() {
                         </div>
 
                         <main>
-                            <Table title={car.VehName} img={`${ApiBase}/media/vehicles/${car.VehImg}`} />
+                            <Table title={car.VehName} data={car} img />
+                            <Table list={listCars} img />
                         </main>
                     </Content>
                 </Layer>
