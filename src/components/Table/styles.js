@@ -7,6 +7,9 @@ export const Container = styled.table`
     letter-spacing: 1px;
 
     > caption {
+        height: 67px;
+        padding-top: 18px;
+
         font-size: 22px;
         font-weight: 500;
         background-color: ${({ theme }) => theme.COLORS.BLUE_100};
@@ -21,6 +24,18 @@ export const Container = styled.table`
     td > img {
         width: 150px;
         height: 150px;
+    }
+
+    td > div {
+        margin: 0;
+
+        div {
+            background-color: ${({ theme }) => theme.COLORS.BLUE_100};
+
+            svg {
+                color: ${({ theme }) => theme.COLORS.WHITE};
+            }
+        }
     }
 
     td:last-of-type {

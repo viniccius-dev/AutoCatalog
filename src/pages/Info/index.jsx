@@ -22,9 +22,9 @@ export function Info() {
                 <Layer>
                     <Content>
 
-                        <Table />
+                        <Table title="Ficha Técnica" />
                         <div>
-                            <InputSelect title="Celta" group="cars" options={options}  />
+                            <InputSelect title="Celta" group="cars" options={options} />
 
                             <img src={imgCar} />
 

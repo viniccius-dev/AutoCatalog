@@ -114,17 +114,16 @@ export function UpdateVec() {
             return console.error("Selecione uma marca");
         }
 
-        delete data.img;
         formData.append('brandId', selectedOptionBrand.id);
+
+        if (imgBrandPreview === `${ApiBase}/media/brand/${selectedOptionBrand.img}`) {
+            delete data.img;
+        }
 
         for (const key in data) {
             if(data[key]){
                 formData.append(key, data[key]);
             }
-        }
-
-        if (imgBrandPreview !== `${ApiBase}/media/brand/${selectedOptionBrand.img}`) {
-            formData.append('img', imgBrandRef.current.files[0]);
         }
 
         try {
@@ -151,12 +150,10 @@ export function UpdateVec() {
             return console.error("Selecione um veículo");
         }
 
-        delete data.img;
-        delete data.VehImg;
         formData.append('vehicleId', selectedOptionVehicle.id);
 
-        if (imgVehiclePreview !== `${ApiBase}/media/vehicle/${selectedOptionVehicle.VehImg}`) {
-            formData.append('VehImg', imgVehicleRef.current.files[0]);
+        if (imgVehiclePreview === `${ApiBase}/media/vehicle/${selectedOptionVehicle.VehImg}`) {
+            delete data.VehImg;
         }
 
         for (const key in data) {
@@ -338,7 +335,6 @@ export function UpdateVec() {
                                 ref={imgBrandRef}
                                 id="brand"
                                 type="file"
-                                {...registerBrand("img")}
                                 onChange={(e) => handleImageChange(e, setImgBrandPreview, setValueBrand)}
                             />
                         </label>
@@ -387,7 +383,6 @@ export function UpdateVec() {
                                 ref={imgVehicleRef}
                                 id="vehicle"
                                 type="file"
-                                {...registerVehicle("img")}
                                 onChange={(e) => handleImageChange(e, setImgVehiclePreview, setValueVehicle)}
                             />
                         </label>

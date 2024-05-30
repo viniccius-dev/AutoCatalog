@@ -1,9 +1,25 @@
 import { Container } from './styles';
 
-export function Table({ img }) {
+import { InputSelect } from '../InputSelect';
+
+export function Table({ title, list, img }) {
     return(
         <Container>
-            <caption>Ficha Técnica</caption>
+            {
+                list ? 
+                    <thead>
+                        <tr>
+                            <td colSpan={2}>
+                                <InputSelect title="Celta" group="cars" options={list} />
+                            </td>
+                        </tr> 
+                    </thead>
+                    
+                : 
+                <caption>{title}</caption>
+
+            }
+            
             <tbody>
                 {
                     img &&
