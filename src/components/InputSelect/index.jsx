@@ -1,12 +1,12 @@
 import { FiChevronDown, FiChevronUp, FiCheck } from 'react-icons/fi';
 
 import { Container, SelectButton, Chevrons, OptionsList, Option } from './styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
-export function InputSelect({ title, group, options, onSelect }) {
+export function InputSelect({ title, group, options, onSelect, selected }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(selected || null);
 
     const optionName = group !== 'vehicle' ? 'name' : 'VehName';
 
@@ -18,7 +18,11 @@ export function InputSelect({ title, group, options, onSelect }) {
         setSelectedOption(option);
         setIsOpen(false);
         onSelect(option);
-    }
+    };
+
+    useEffect(() => {
+        setSelectedOption(selected);
+    }, [selected])
 
     return (
         <Container>

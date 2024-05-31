@@ -44,6 +44,12 @@ export const Container = styled.table`
         }
     }
 
+    thead td > svg {
+        font-size: 22px;
+        cursor: pointer;
+        color: ${({ theme }) => theme.COLORS.GRAY_300};
+    }
+
     td:last-of-type {
         text-align: center;
     }

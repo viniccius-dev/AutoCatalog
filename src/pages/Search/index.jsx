@@ -82,9 +82,7 @@ export function Search() {
                 yearsSelected,
                 fuelsSelected
             }
-            console.log(filters);
-
-            // return console.log(filters);
+            
             const response = await API.renderCars(filters);
             setCars(response.cars);
         }
@@ -136,7 +134,7 @@ export function Search() {
                                             <label>
                                                 <input 
                                                     type="checkbox" 
-                                                    value={brand.name} 
+                                                    value={brand.id} 
                                                     name="brand"
                                                     onChange={(e) => handleOptionsFilter(e, brandsSelected, setBrandsSelected)} 
                                                 />

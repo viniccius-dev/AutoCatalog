@@ -11,17 +11,19 @@ import { Table } from '../../components/Table';
 export function Comparison() {
     const [listCars, setListCars] = useState([]);
 
-    const options = [
-        {id: 1, name: 'Celta'},
-        {id: 2, name: 'Corsa'}
-    ];
+    const [selectedCars, setSelectedCars] = useState([null, null]); // Two vehicles for comparison
 
     const car = {
         Brand: "Chevrolet-RM",
         BrandImg: "1a05d9ad7bed423ea811ce397557e53e.png",
         VehImg: "49b96350a56bb96caa0e3f97a7b9dca8.png",
         VehName: "Celta",
-        consumption: "10.10",
+        autonomyAlcohol: "450",
+        autonomyEletric: "35",
+        autonomyGasoline: "620",
+        consumptionAlcohol: "10.10",
+        consumptionGasoline: "11.70",
+        fuelType: "Híbrido",
         id: "13",
         price: "32755.00",
         tankCapacity: "55",
@@ -31,37 +33,6 @@ export function Comparison() {
         year: "2022"
     }
 
-    const cars = [
-        {
-            Brand: "Chevrolet-RM",
-            BrandImg: "1a05d9ad7bed423ea811ce397557e53e.png",
-            VehImg: "49b96350a56bb96caa0e3f97a7b9dca8.png",
-            VehName: "Celta",
-            consumption: "10.10",
-            id: "13",
-            price: "32755.00",
-            tankCapacity: "55",
-            trunkCapacity: "285",
-            velocity: "10.10",
-            weight: "1055.00",
-            year: "2022"
-        },
-        {
-            Brand: "Chevrolet-RM",
-            BrandImg: "1a05d9ad7bed423ea811ce397557e53e.png",
-            VehImg: "6cc005a8299b893eab8a42471cd55300.png",
-            VehName: "Corsa",
-            consumption: "12.60",
-            id: "14",
-            price: "27260.00",
-            tankCapacity: "44",
-            trunkCapacity: "260",
-            velocity: "13.60",
-            weight: "1029.00",
-            year: "2011"
-        }
-    ]
-
     useEffect(() => {
         async function fetchVehicles() {
             const response = await API.renderCars();
@@ -69,7 +40,34 @@ export function Comparison() {
         }
 
         fetchVehicles();
-    }, [])
+    }, []);
+
+    const handleSelectVehicle = (index, vehicle) => {
+        const updatedSelectedCars = [...selectedCars];
+        updatedSelectedCars[index] = vehicle;
+        if(index === selectedCars.length - 1 && selectedCars.length < 4) {
+            updatedSelectedCars.push(null);
+        }
+        setSelectedCars(updatedSelectedCars);
+        console.log(updatedSelectedCars);
+    }
+
+    const handleRemoveVehicle = (index) => {
+        const updatedSelectedCars = selectedCars.slice();
+        updatedSelectedCars[index] = null;
+
+        // Ensure at least two tables are always present
+        const nonEmptyCars = updatedSelectedCars.filter(car => car !== null);
+        if (nonEmptyCars.length < 3) {
+            while (nonEmptyCars.length < 3) {
+                nonEmptyCars.push(null);
+            }
+            setSelectedCars(nonEmptyCars);
+        } else {
+            setSelectedCars(updatedSelectedCars);
+        }
+        console.log(updatedSelectedCars);
+    }
 
     return (
         <Container>
@@ -84,8 +82,18 @@ export function Comparison() {
                         </div>
 
                         <main>
-                            <Table title={car.VehName} data={car} img />
-                            <Table list={listCars} img />
+                            {/* <Table title={car.VehName} data={car} img /> */}
+                            {selectedCars.map((car, index) => (
+                                <Table 
+                                    key={index}
+                                    title={car?.VehName || "Selecionar"}
+                                    data={car}
+                                    list={listCars}
+                                    onSelect={(vehicle) => handleSelectVehicle(index, vehicle)}
+                                    onRemove={() => handleRemoveVehicle(index)}
+                                    img
+                                />
+                            ))}
                         </main>
                     </Content>
                 </Layer>

@@ -24,7 +24,7 @@ export const Layer = styled.div`
 
     display: flex;
     align-items: center;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.5);
 `;
 
 export const Content = styled.div`
@@ -77,6 +77,17 @@ export const Content = styled.div`
             > svg {
                 font-size: 21px;
             }
+        }
+    }
+
+    > table {
+        caption {
+            height: auto;
+            padding: 0;
+        }
+
+        td, th {
+            height: auto;
         }
     }
 `;
