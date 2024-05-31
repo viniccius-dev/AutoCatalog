@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { FiX } from 'react-icons/fi';
 
 import { Background, Container, Content } from './styles';
@@ -6,6 +7,13 @@ import { Card } from '../../components/Card';
 import { ApiBase } from '../../helpers/api';
 
 export function Vehicles({ closeModal, cars }) {
+
+    const navigate = useNavigate();
+
+    const handleNavigateInfo = (id) => {
+        navigate(`/info/${id}`);
+    }
+
     return (
         <Background>
             <Container>
@@ -22,6 +30,7 @@ export function Vehicles({ closeModal, cars }) {
                             title={car.VehName} 
                             img={`${ApiBase}/media/vehicle/${car.VehImg}`} 
                             alt="vehicle" 
+                            onClick={() => handleNavigateInfo(car.id)}
                         />
                     ))}
                 </Content>

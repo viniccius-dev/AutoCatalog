@@ -10,6 +10,7 @@ import {
 
 import { FiSearch } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -19,6 +20,8 @@ import { API, ApiBase } from '../../helpers/api';
 
 export function Search() {
     const fuels = ['Combustão', 'Elétrico', 'Híbrido'];
+
+    const navigate = useNavigate();
     
     const [search, setSearch] = useState("");
     const [valueMin, setValueMin] = useState("");
@@ -59,6 +62,10 @@ export function Search() {
         }
     } 
 
+    const handleNavigateInfo = (id) => {
+        navigate(`/info/${id}`);
+    }
+
     useEffect(() => {
         async function fetchData() {
             const dataBrands = await API.renderBrands();
@@ -83,7 +90,7 @@ export function Search() {
                 fuelsSelected
             }
             
-            const response = await API.renderCars(filters);
+            const response = await API.renderFilters(filters);
             setCars(response.cars);
         }
 
@@ -231,6 +238,7 @@ export function Search() {
                                         key={car.id} 
                                         title={car.VehName} 
                                         img={`${ApiBase}/media/vehicle/${car.VehImg}`} 
+                                        onClick={() => handleNavigateInfo(car.id)}
                                         alt="vehicle" 
                                     />
                                 ))}

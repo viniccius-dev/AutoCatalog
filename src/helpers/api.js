@@ -112,6 +112,37 @@ const API = {
         return json;
     },
 
+    
+    renderFilters:async (filters) => {
+
+        const url = `${ApiBase}/search?search=${filters.search}&valueMin=${filters.valueMin}&valueMax=${filters.valueMax}&consumptionMin=${filters.consumptionMin}&consumptionMax=${filters.consumptionMax}&brandsSelected=${filters.brandsSelected}&yearsSelected=${filters.yearsSelected}&fuelsSelected=${filters.fuelsSelected}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        const json = await response.json();
+        return json;
+    },
+
+    renderVehicle:async (id) => {
+
+        const url = `${ApiBase}/rendervehicle?id=${id}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        const json = await response.json();
+        return json;
+    },
+
     updatebrand: async (formData) => {
         const token = storage.get("token");
     
@@ -193,6 +224,9 @@ const API = {
     
         return await response.json();
     },
+
+
+
 
 };
 

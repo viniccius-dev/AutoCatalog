@@ -28,7 +28,7 @@ export const Layer = styled.div`
 `;
 
 export const Content = styled.div`
-    width: 700px;
+    width: 770px;
     max-height: 95%; 
     margin: 0 auto;
     padding: 50px;
@@ -48,7 +48,7 @@ export const Content = styled.div`
     gap: 40px;
 
     > div {
-        height: 514px;
+        height: 554px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -59,6 +59,11 @@ export const Content = styled.div`
             svg {
                 color: ${({ theme }) => theme.COLORS.WHITE};
             }
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
         }
 
         > button {

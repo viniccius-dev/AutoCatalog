@@ -129,4 +129,8 @@ export const FilterNumbers = styled.div`
 
 export const FilteredArrays = styled.ul`
     list-style-type: none;
+
+    li label input {
+        margin-right: 5px;
+    }
 `;
