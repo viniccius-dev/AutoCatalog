@@ -164,7 +164,7 @@ export function UpdateVec() {
             }
         }
         
-        if(velocityRef.current){
+        if(velocityRef.current.value){
             formData.append('velocity', velocityRef.current.value.replace(',','.'));
         }
 
@@ -397,11 +397,11 @@ export function UpdateVec() {
                         <InputSelect title="Selecione uma veículo" group="vehicle" options={optionsVehicles} onSelect={handleSelectVehicle} />
 
                         <Input name="vehicleName" placeholder="Atualizar nome" {...registerVehicle("newName")} />
-                        <Input name="year" placeholder="Atualizar ano" {...registerVehicle("year")} />
-                        <Input name="price" placeholder="Atualizar preço" {...registerVehicle("price")} />
-                        <Input name="velocity" placeholder="Atualizar tempo de 0 a 100 km/h" ref={velocityRef} />
-                        <Input name="trunkCapacity" placeholder="Atualizar cap. do porta malas (L)" {...registerVehicle("trunkCapacity")} />
-                        <Input name="weight" placeholder="Atualizar peso (Kg)" {...registerVehicle("weight")} />
+                        <Input type="number" name="year" placeholder="Atualizar ano" {...registerVehicle("year")} />
+                        <Input type="number" name="price" placeholder="Atualizar preço" {...registerVehicle("price")} />
+                        <Input type="number" step="0.01" name="velocity" placeholder="Atualizar tempo de 0 a 100 km/h" ref={velocityRef} />
+                        <Input type="number" name="trunkCapacity" placeholder="Atualizar cap. do porta malas (L)" {...registerVehicle("trunkCapacity")} />
+                        <Input type="number" name="weight" placeholder="Atualizar peso (Kg)" {...registerVehicle("weight")} />
 
                         <InputSelect
                             title="Atualize o tipo de propulsão"
@@ -410,6 +410,7 @@ export function UpdateVec() {
                             onSelect={handleSelectFuel}
                         />
                         <Input
+                            type="number"
                             ref={tankCapacityRef}
                             name="tankCapacity"
                             placeholder="Cap. do tanque de combustível (L)"
@@ -417,6 +418,8 @@ export function UpdateVec() {
                             disabled
                         />
                         <Input
+                            type="number"
+                            step="0.01"
                             ref={consumptionAlcoholRef}
                             name="consumption-a"
                             placeholder="Consumo médio - Km/l (A)"
@@ -424,6 +427,8 @@ export function UpdateVec() {
                             disabled
                         />
                         <Input
+                            type="number"
+                            step="0.01"
                             ref={consumptionGasolineRef}
                             name="consumption-g"
                             placeholder="Consumo médio - Km/l (G)"
@@ -431,18 +436,21 @@ export function UpdateVec() {
                             disabled
                         />
                         <Input
+                            type="number"
                             ref={autonomyAlcoholRef}
                             name="autonomyAlcohol"
                             placeholder="Autonomia - Km (Álcool)"
                             disabled
                         />
                         <Input
+                            type="number"
                             ref={autonomyGasolineRef}
                             name="autonomyGasoline"
                             placeholder="Autonomia - Km (Gasolina)"
                             disabled
                         />
                         <Input
+                            type="number"
                             ref={autonomyEletricRef}
                             name="autonomyEletric"
                             placeholder="Autonomia - Km (Elétrico)"

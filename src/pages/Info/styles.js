@@ -48,7 +48,7 @@ export const Content = styled.div`
     gap: 40px;
 
     > div {
-        height: 554px;
+        height: 518px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

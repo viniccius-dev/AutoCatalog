@@ -269,19 +269,19 @@ export function New() {
                         </label>
 
                         <Input name="vehicleName" placeholder="Nome do veículo" required />
-                        <Input name="year" placeholder="Ano" required />
-                        <Input name="price" placeholder="Preço" required />
-                        <Input name="velocity" placeholder="Tempo de 0 a 100 km/h" required />
-                        <Input name="trunkCapacity" placeholder="Cap. do porta malas (L)" required />
-                        <Input name="weight" placeholder="Peso (Kg)" required />
+                        <Input type="number" name="year" placeholder="Ano" required />
+                        <Input type="number" name="price" placeholder="Preço" required />
+                        <Input type="number" step="0.01" name="velocity" placeholder="Tempo de 0 a 100 km/h" required />
+                        <Input type="number" name="trunkCapacity" placeholder="Cap. do porta malas (L)" required />
+                        <Input type="number" name="weight" placeholder="Peso (Kg)" required />
 
                         <InputSelect title="Selecione o tipo de propulsão" group="fuel" options={optionsFuel} onSelect={handleSelectFuel} required />
-                        <Input ref={tankCapacityRef} name="tankCapacity" placeholder="Cap. do tanque de combustível (L)" required disabled />
-                        <Input ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" disabled />
-                        <Input ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" disabled />
-                        <Input ref={autonomyAlcoholRef} name="autonomyAlcohol" placeholder="Autonomia - Km (Álcool)" disabled />
-                        <Input ref={autonomyGasolineRef} name="autonomyGasoline" placeholder="Autonomia - Km (Gasolina)" disabled />
-                        <Input ref={autonomyEletricRef} name="autonomyEletric" placeholder="Autonomia - Km (Elétrico)" required disabled />
+                        <Input type="number" ref={tankCapacityRef} name="tankCapacity" placeholder="Cap. do tanque de combustível (L)" required disabled />
+                        <Input type="number" step="0.01" ref={consumptionAlcoholRef} name="consumption-a" placeholder="Consumo médio - Km/l (A)" disabled />
+                        <Input type="number" step="0.01" ref={consumptionGasolineRef} name="consumption-g" placeholder="Consumo médio - Km/l (G)" disabled />
+                        <Input type="number" ref={autonomyAlcoholRef} name="autonomyAlcohol" placeholder="Autonomia - Km (Álcool)" disabled />
+                        <Input type="number" ref={autonomyGasolineRef} name="autonomyGasoline" placeholder="Autonomia - Km (Gasolina)" disabled />
+                        <Input type="number" ref={autonomyEletricRef} name="autonomyEletric" placeholder="Autonomia - Km (Elétrico)" required disabled />
 
                     </Section>
 

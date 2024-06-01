@@ -42,7 +42,7 @@ export const Content = styled.div`
 
     background: ${({ theme }) => theme.COLORS.BACKGROUND_LINEAR_GRADIENT};
 
-    > div {
+    > header {
         display: flex;
         align-items: center;
         justify-content: space-between;

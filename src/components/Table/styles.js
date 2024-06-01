@@ -32,22 +32,46 @@ export const Container = styled.table`
     }
 
     td > div {
-        margin: 0;
+    }
 
-        div {
-            background-color: ${({ theme }) => theme.COLORS.BLUE_100};
-            font-size: 19px;
+    thead td > div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
 
-            svg {
-                color: ${({ theme }) => theme.COLORS.WHITE};
+        > div {
+            width: 80%;
+
+            div {
+                margin: 0;
+
+                div {
+                    background-color: ${({ theme }) => theme.COLORS.BLUE_100};
+                    font-size: 19px;
+
+                    svg {
+                        color: ${({ theme }) => theme.COLORS.WHITE};
+                    }
+                }
             }
+        }
+
+        > svg {
+            font-size: 20px;
+            cursor: pointer;
+            color: ${({ theme }) => theme.COLORS.GRAY_300};
         }
     }
 
-    thead td > svg {
-        font-size: 22px;
-        cursor: pointer;
-        color: ${({ theme }) => theme.COLORS.GRAY_300};
+    tbody td div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > svg {
+            margin-left: 5px;
+            min-width: 15px;
+        }
     }
 
     td:last-of-type {
