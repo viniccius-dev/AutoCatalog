@@ -19,7 +19,7 @@ export function AppRoutes() {
                 <Route path="/new" element={<New />} />
                 <Route path="/update" element={<UpdateVec />} />
                 <Route path="/info/:id" element={<Info />} />
-                <Route path="/comparison/:id" element={<Comparison />} />
+                <Route path="/comparison" element={<Comparison />} />
                 <Route path="/search" element={<Search />} />
             </Routes>
         </BrowserRouter>
