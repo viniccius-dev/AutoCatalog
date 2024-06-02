@@ -8,6 +8,7 @@ import { Info } from '../pages/Info';
 import { UpdateVec } from '../pages/UpdateVec';
 import { Search } from '../pages/Search';
 import { Comparison } from '../pages/Comparison';
+import { History } from '../pages/History';
 
 export function AppRoutes() {
     return (
@@ -21,6 +22,7 @@ export function AppRoutes() {
                 <Route path="/info/:id" element={<Info />} />
                 <Route path="/comparison" element={<Comparison />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/history" element={<History />} />
             </Routes>
         </BrowserRouter>
     );

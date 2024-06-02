@@ -225,6 +225,84 @@ const API = {
         return await response.json();
     },
 
+    savehistory: async (history) => {
+
+
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/savehistory', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ history })
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
+    renderhistory:async (page) => {
+
+        const token = storage.get("token");
+        const url = `${ApiBase}/renderhistory?page=${page}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        const json = await response.json();
+        return json;
+    },
+
+    renderLikes:async (page) => {
+
+        const token = storage.get("token");
+        const url = `${ApiBase}/renderlikes?page=${page}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        const json = await response.json();
+        return json;
+    },
+
+    addfavorites: async (save) => {
+
+
+        const token = storage.get("token");
+    
+        const response = await fetch(ApiBase + '/addfavorites', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ save })
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    
+        return await response.json();
+    },
+
 
 
 

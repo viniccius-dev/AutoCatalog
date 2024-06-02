@@ -40,9 +40,13 @@ export function Comparison() {
 
         try {
             const filterSelectedCars = updatedSelectedCars.filter(car => car !== null);
-            await API.savehistory(filterSelectedCars);
+            if(filterSelectedCars.length < 2) {
+                return;
+            }
+            const response = await API.savehistory(filterSelectedCars);
+            console.log(response);
         } catch(error) {
-            console.error('Não foi possível salvar no histórico');
+            console.error('Não foi possível salvar no histórico:', error);
         }
     }
 
