@@ -13,7 +13,9 @@ import { DisplayMessage } from "../../components/DisplayMessage";
 export function Comparison() {
     const profile = storage.get("profile");
     const [listCars, setListCars] = useState([]);
+    const [listLikes, setListLikes] = useState([]);
     const [isLike, setIsLike] = useState(false);
+    const [currentComparisonId, setCurrentComparisonId] = useState("");
 
     const [type, setType] = useState("");
     const [message, setMessage] = useState("");
@@ -30,6 +32,25 @@ export function Comparison() {
         fetchVehicles();
     }, []);
 
+    useEffect(() => {
+        async function fetchFavorites() {
+            try {
+                const response = await API.renderLikes();
+                setListLikes(response.likes);
+            } catch (error) {
+                console.error("Erro ao buscar os favoritos");
+            }
+        }
+
+        fetchFavorites();
+
+        if(listLikes.find(like => like.history_id === currentComparisonId)) {
+            setIsLike(true);
+        } else {
+            setIsLike(false);
+        }
+    }, [currentComparisonId]);
+
     const handleSelectVehicle = async (index, vehicle) => {
         const updatedSelectedCars = [...selectedCars];
         updatedSelectedCars[index] = vehicle;
@@ -38,15 +59,17 @@ export function Comparison() {
         }
         setSelectedCars(updatedSelectedCars);
 
-        try {
-            const filterSelectedCars = updatedSelectedCars.filter(car => car !== null);
-            if(filterSelectedCars.length < 2) {
-                return;
+        if(profile) {
+            try {
+                const filterSelectedCars = updatedSelectedCars.filter(car => car !== null);
+                if(filterSelectedCars.length < 2) {
+                    return;
+                }
+                const response = await API.savehistory(filterSelectedCars);
+                setCurrentComparisonId(response.data.id);
+            } catch(error) {
+                console.error('Não foi possível salvar no histórico:', error);
             }
-            const response = await API.savehistory(filterSelectedCars);
-            console.log(response);
-        } catch(error) {
-            console.error('Não foi possível salvar no histórico:', error);
         }
     }
 
@@ -87,9 +110,13 @@ export function Comparison() {
     const handleChangeLike = async () => {
         const filterSelectedCars = selectedCars.filter(car => car !== null);
 
+        if(filterSelectedCars.length < 2) { return };
+
+        console.log(currentComparisonId);
+
         if(!isLike) {
             try {
-                await API.addfavorites(filterSelectedCars);
+                await API.addfavorites(currentComparisonId);
                 setIsLike(true);
             } catch(error) {
                 setType('error');
@@ -106,7 +133,23 @@ export function Comparison() {
                 }, 5000);
             }
         } else {
-            setIsLike(false);
+            try {
+                await API.addfavorites(currentComparisonId);
+                setIsLike(false);
+            } catch(error) {
+                setType('error');
+
+                if(error.message) {
+                    setMessage(error.message);
+                } else {
+                    setMessage('Erro ao remover dos favoritos.')
+                }
+        
+                setShowMessage(true);
+                setTimeout(() => {
+                    setShowMessage(false);
+                }, 5000);
+            }
         }
     }
 

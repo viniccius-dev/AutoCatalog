@@ -13,7 +13,7 @@ export function History() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await API.renderhistory();
+                const response = await API.renderhistory(1);
                 setListComparison(response.data);
             } catch (error) {
                 console.error('Erro ao buscar dados do histórico:', error);

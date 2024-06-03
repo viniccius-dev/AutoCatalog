@@ -281,7 +281,7 @@ const API = {
         return json;
     },
 
-    addfavorites: async (save) => {
+    addfavorites: async (id) => {
 
 
         const token = storage.get("token");
@@ -292,7 +292,7 @@ const API = {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ save })
+            body: JSON.stringify({ id })
         });
     
         if (!response.ok) {
