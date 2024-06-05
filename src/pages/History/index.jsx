@@ -8,19 +8,40 @@ import { Header } from '../../components/Header';
 import { API, ApiBase } from "../../helpers/api";
 
 export function History() {
+    const [originHistory, setOriginHistory] = useState([]);
     const [listComparison, setListComparison] = useState([]);
+    const [listFavorites, setListFavorites] = useState([]);
+    const [pagesHistory, setPagesHistory] = useState(null);
+    const [pagesFavorites, setPagesFavorites] = useState(null);
+    const [favorites, setFavorites] = useState(false);
+
+    const handleViewFavorites = () => {
+        if(!favorites) {
+            setListComparison(listFavorites);
+            setFavorites(true);
+        } else {
+            setListComparison(originHistory);
+            setFavorites(false);
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await API.renderhistory(1);
-                setListComparison(response.data);
+                const dataHistories = await API.renderhistory();
+                const dataFavorites = await API.renderLikes();
+                setOriginHistory(dataHistories.data);
+                setListComparison(dataHistories.data);
+                setListFavorites(dataFavorites.likes);
+                setPagesHistory(dataHistories.pages);
+                setPagesFavorites(dataFavorites.pages);
             } catch (error) {
-                console.error('Erro ao buscar dados do histórico:', error);
+                console.error('Erro ao buscar dados:', error);
             }
         };
 
         fetchData();
+        console.log(originHistory, listFavorites);
     }, []);
 
     return (
@@ -30,7 +51,7 @@ export function History() {
             <main>
                 <header>
                     <h1>Histórico</h1>
-                    <button><FaRegHeart /> Favoritos</button>
+                    <button onClick={handleViewFavorites}>{!favorites ? <FaRegHeart /> : <FaHeart />} Favoritos</button>
                 </header>
 
                 <section>

@@ -112,8 +112,6 @@ export function Comparison() {
 
         if(filterSelectedCars.length < 2) { return };
 
-        console.log(currentComparisonId);
-
         if(!isLike) {
             try {
                 await API.addfavorites(currentComparisonId);
