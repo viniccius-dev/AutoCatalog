@@ -93,5 +93,47 @@ export const Container = styled.div`
                 }
             }
         }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+
+            button {
+                font-size: 16px;
+                color: ${({ theme }) => theme.COLORS.BLUE_100};
+                background: none;
+                border: none;
+                cursor: pointer;
+
+                &:disabled {
+                    color: ${({ theme }) => theme.COLORS.GRAY_300};
+                    cursor: not-allowed;
+                }
+            }
+
+            .btnPages {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+            }
+
+            .pages > button {
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+
+            button.active {
+                background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+                color: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+                border: ${({ theme }) => `1px solid ${theme.COLORS.GRAY_100}`};
+            }
+
+            span {
+                font-size: 16px;
+                color: ${({ theme }) => theme.COLORS.GRAY_300};
+            }
+        }
     }
 `;
