@@ -34,7 +34,7 @@ export function History() {
                 setListComparison(dataHistories.data);
                 setListFavorites(dataFavorites.likes);
                 setPagesHistory(dataHistories.pages);
-                setPagesFavorites(dataFavorites.pages);
+                // setPagesFavorites(dataFavorites.pages);
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
