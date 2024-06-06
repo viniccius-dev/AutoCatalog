@@ -13,9 +13,8 @@ import { DisplayMessage } from "../../components/DisplayMessage";
 export function Comparison() {
     const profile = storage.get("profile");
     const [listCars, setListCars] = useState([]);
-    const [listLikes, setListLikes] = useState([]);
     const [isLike, setIsLike] = useState(false);
-    const [currentComparisonId, setCurrentComparisonId] = useState("");
+    const [currentComparison, setCurrentComparison] = useState("");
 
     const [type, setType] = useState("");
     const [message, setMessage] = useState("");
@@ -30,26 +29,16 @@ export function Comparison() {
         }
 
         fetchVehicles();
-    }, []);
+    }, [currentComparison]);
 
     useEffect(() => {
-        async function fetchFavorites() {
-            try {
-                const response = await API.renderLikes();
-                setListLikes(response.likes);
-            } catch (error) {
-                console.error("Erro ao buscar os favoritos");
-            }
-        }
-
-        fetchFavorites();
-
-        if(listLikes.find(like => like.history_id === currentComparisonId)) {
+        if(currentComparison.isLiked) {
             setIsLike(true);
         } else {
             setIsLike(false);
         }
-    }, [currentComparisonId]);
+        console.log(currentComparison);
+    }, [currentComparison]);
 
     const handleSelectVehicle = async (index, vehicle) => {
         const updatedSelectedCars = [...selectedCars];
@@ -66,7 +55,7 @@ export function Comparison() {
                     return;
                 }
                 const response = await API.savehistory(filterSelectedCars);
-                setCurrentComparisonId(response.data.id);
+                setCurrentComparison(response);
             } catch(error) {
                 console.error('Não foi possível salvar no histórico:', error);
             }
@@ -114,7 +103,7 @@ export function Comparison() {
 
         if(!isLike) {
             try {
-                await API.addfavorites(currentComparisonId);
+                await API.addfavorites(currentComparison.data.id);
                 setIsLike(true);
             } catch(error) {
                 setType('error');
@@ -132,7 +121,7 @@ export function Comparison() {
             }
         } else {
             try {
-                await API.addfavorites(currentComparisonId);
+                await API.addfavorites(currentComparison.data.id);
                 setIsLike(false);
             } catch(error) {
                 setType('error');

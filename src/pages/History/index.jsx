@@ -61,7 +61,6 @@ export function History() {
     };
 
     const getVisiblePages = (page, totalPages) => {
-        console.log(totalPages);
         if (totalPages <= 5) return Array.from({ length: totalPages }, (_, i) => i);
         if (page <= 2) return [0, 1, 2, 3, 4];
         if (page >= totalPages - 3) return Array.from({ length: 5 }, (_, i) => totalPages - 5 + i);
