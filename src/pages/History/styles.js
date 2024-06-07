@@ -78,6 +78,10 @@ export const Container = styled.div`
                 }
             }
 
+            div.inactive {
+                cursor: default;
+            }
+
             div.cars {
                 display: flex;
                 justify-content: left;

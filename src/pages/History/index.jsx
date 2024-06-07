@@ -71,7 +71,7 @@ export function History() {
         if (comparison.car_3) params.append('car3', comparison.car_3.id);
         if (comparison.car_4) params.append('car4', comparison.car_4.id);
         navigate(`/comparison?${params.toString()}`);
-    }
+    };
 
     const getVisiblePages = (page, totalPages) => {
         if (totalPages <= 5) return Array.from({ length: totalPages }, (_, i) => i);
@@ -82,45 +82,55 @@ export function History() {
 
     useEffect(() => {
         fetchHistoryData(currentPageHistory);
-        fetchFavoritesData(currentPageFavorites);
     }, []);
 
     const renderComparisons = () => {
-        return listComparison.length > 0 ? listComparison.map(comparison => (
-            <div key={comparison.id} className="card" onClick={() => handleCardClick(comparison)}>
-                <div className="cars">
-                    {comparison.car_1 && 
-                        <img 
-                            src={`${ApiBase}/media/vehicle/${comparison.car_1.vehicleImage}`}
-                            alt={comparison.car_1.vehicleName}
-                            title={comparison.car_1.vehicleName}
-                        />}     
-                    {comparison.car_2 && 
-                        <img 
-                            src={`${ApiBase}/media/vehicle/${comparison.car_2.vehicleImage}`}
-                            alt={comparison.car_2.vehicleName}
-                            title={comparison.car_2.vehicleName}
-                        />
-                    }     
-                    {comparison.car_3 && 
-                        <img 
-                            src={`${ApiBase}/media/vehicle/${comparison.car_3.vehicleImage}`} 
-                            alt={comparison.car_3.vehicleName}
-                            title={comparison.car_3.vehicleName}
-                        />
-                    }     
-                    {comparison.car_4 && 
-                        <img 
-                            src={`${ApiBase}/media/vehicle/${comparison.car_4.vehicleImage}`} 
-                            alt={comparison.car_4.vehicleName}
-                            title={comparison.car_4.vehicleName}
-                        />
-                    }     
+        return listComparison.length > 0 ? listComparison.map(comparison => {
+            const { car_1, car_2, car_3, car_4 } = comparison;
+            const anyCarIsFalse = [car_1, car_2, car_3, car_4].some(car => car === false);
+
+            return (
+                <div key={comparison.id} className={`card ${anyCarIsFalse ? 'inactive' : ''}`} onClick={!anyCarIsFalse ? () => handleCardClick(comparison) : null}>
+                    <div className="cars">
+                        {anyCarIsFalse ? (
+                            <p>Comparação de veículo não encontrada</p>
+                        ) : (
+                            <>
+                                {car_1 !== null && (
+                                    <img 
+                                        src={`${ApiBase}/media/vehicle/${car_1.vehicleImage}`}
+                                        alt={car_1.vehicleName}
+                                        title={car_1.vehicleName}
+                                    />     
+                                )}
+                                {car_2 !== null && (
+                                    <img 
+                                        src={`${ApiBase}/media/vehicle/${car_2.vehicleImage}`}
+                                        alt={car_2.vehicleName}
+                                        title={car_2.vehicleName}
+                                    />     
+                                )}
+                                {car_3 !== null && (
+                                    <img 
+                                        src={`${ApiBase}/media/vehicle/${car_3.vehicleImage}`} 
+                                        alt={car_3.vehicleName}
+                                        title={car_3.vehicleName}
+                                    />     
+                                )}
+                                {car_4 !== null && (
+                                    <img 
+                                        src={`${ApiBase}/media/vehicle/${car_4.vehicleImage}`} 
+                                        alt={car_4.vehicleName}
+                                        title={car_4.vehicleName}
+                                    />     
+                                )}
+                            </>
+                        )}
+                    </div>
+                    <h3>Comparativo</h3>
                 </div>
-                    
-                <h3>Comparativo</h3>
-            </div>
-        )) : <h3>Não há nenhum histórico de comparativos</h3>;
+            );
+        }) : <h3>Não há nenhum histórico de comparativos</h3>;
     };
 
     const totalPages = favorites ? pagesFavorites : pagesHistory;
