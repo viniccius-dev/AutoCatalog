@@ -22,6 +22,12 @@ export function Info() {
         navigate(`/info/${option.id}`);
         setOptionSelected(option.id);
     }
+
+    const handleCardClick = (vehicle) => {
+        const params = new URLSearchParams();
+        params.append('car1', vehicle.id);
+        navigate(`/comparison?${params.toString()}`);
+    }
     
     useEffect(() => {
         async function fetchVehicle() {
@@ -53,7 +59,7 @@ export function Info() {
 
                             {vehicle && <img src={`${ApiBase}/media/vehicle/${vehicle.VehImg}`} />}
 
-                            <button>
+                            <button onClick={() => handleCardClick(vehicle)}>
                                 Realizar comparação
                                 <FiArrowRight />
                             </button>

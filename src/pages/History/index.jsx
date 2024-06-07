@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart, FaArrowLeft, FaArrowRight } from "react-icons/fa6";
+
 import { Container } from './styles';
 import { Header } from '../../components/Header';
 import { API, ApiBase } from "../../helpers/api";
@@ -12,6 +14,8 @@ export function History() {
     const [currentPageHistory, setCurrentPageHistory] = useState(0);
     const [currentPageFavorites, setCurrentPageFavorites] = useState(0);
     const [visiblePages, setVisiblePages] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleViewFavorites = () => {
         if (!favorites) {
@@ -60,6 +64,15 @@ export function History() {
         }
     };
 
+    const handleCardClick = (comparison) => {
+        const params = new URLSearchParams();
+        if (comparison.car_1) params.append('car1', comparison.car_1.id);
+        if (comparison.car_2) params.append('car2', comparison.car_2.id);
+        if (comparison.car_3) params.append('car3', comparison.car_3.id);
+        if (comparison.car_4) params.append('car4', comparison.car_4.id);
+        navigate(`/comparison?${params.toString()}`);
+    }
+
     const getVisiblePages = (page, totalPages) => {
         if (totalPages <= 5) return Array.from({ length: totalPages }, (_, i) => i);
         if (page <= 2) return [0, 1, 2, 3, 4];
@@ -74,7 +87,7 @@ export function History() {
 
     const renderComparisons = () => {
         return listComparison.length > 0 ? listComparison.map(comparison => (
-            <div key={comparison.id} className="card">
+            <div key={comparison.id} className="card" onClick={() => handleCardClick(comparison)}>
                 <div className="cars">
                     {comparison.car_1 && 
                         <img 
