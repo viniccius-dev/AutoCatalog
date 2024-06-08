@@ -49,6 +49,9 @@ export const Container = styled.div`
 
                 h3 {
                     padding: 15PX 0;
+                    color: ${({ theme }) => theme.COLORS.BLUE_100};
+                    font-size: 17px;
+                    font-weight: 800;
                 }
 
                 p {

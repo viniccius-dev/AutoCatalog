@@ -81,6 +81,8 @@ export function Comparison() {
                 const filterSelectedCars = updatedSelectedCars.filter(car => car !== null);
                 if (filterSelectedCars.length < 2) return;
 
+                console.log(updatedSelectedCars, filterSelectedCars); //Mesma comparações para usuários diferentes
+
                 const response = await API.savehistory(filterSelectedCars);
                 setCurrentComparison(response);
             } catch (error) {

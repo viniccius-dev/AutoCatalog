@@ -18,7 +18,7 @@ export function About() {
             <main>
                 <section>
                     <header>
-                        <h1>Adicionar veículo</h1>
+                        <h1>Sobre</h1>
                         <button onClick={handleBack}>Voltar</button>
                     </header>
 

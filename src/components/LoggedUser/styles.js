@@ -4,6 +4,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     text-align: right;
+    position: relative;
 
     > a img {
         width: 56px;
@@ -43,3 +44,36 @@ export const NoAvatar = styled.div`
         font-size: 25px;
     }
 `
+
+export const DropDownList = styled.ul`
+    position: absolute;
+    top: 65px;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: ${({ theme }) => theme.COLORS.WHITE};
+    list-style-type: none;
+    border: ${({ theme }) => `1px solid ${theme.COLORS.GRAY_100}`};
+    z-index: 2;
+
+    a {
+        padding: 10px 25px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        transition: 0.2s;
+        color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+        cursor: pointer;
+
+        &:hover {
+            background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+        }
+    }
+
+    a:not(:last-of-type) {
+        border-bottom: ${({ theme }) => `1px solid ${theme.COLORS.GRAY_100}`};
+    }
+`;
