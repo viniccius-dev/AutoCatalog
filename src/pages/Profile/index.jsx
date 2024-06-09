@@ -5,24 +5,19 @@ import { useState, useEffect } from 'react';
 
 import { Container, Form, Avatar, NoAvatar } from './styles';
 
-import storage from '../../helpers/storage';
-import { API, ApiBase } from '../../helpers/api';
-import Logout from '../../utils/logout';
+import { useAuth } from '../../hooks/auth';
+import { ApiBase } from '../../helpers/api';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { DisplayMessage } from '../../components/DisplayMessage';
 
 export function Profile() {
-    const profile = storage.get("profile");
+    const { user, signOut, updateProfile, type, message, showMessage } = useAuth();
     
     const { register, handleSubmit, setValue } = useForm();
-    const [avatarPreview, setAvatarPreview] = useState(profile.user.avatar || "");
+    const [avatarPreview, setAvatarPreview] = useState(user.user.avatar || "");
     const [avatarFile, setAvatarFile] = useState(null); // Estado para armazenar o arquivo de avatar
-
-    const [type, setType] = useState("");
-    const [message, setMessage] = useState("");
-    const [showMessage, setShowMessage] = useState(false);
 
     const navigate = useNavigate();
 
@@ -31,10 +26,10 @@ export function Profile() {
     }
 
     useEffect(() => {
-        if (profile.user.avatar) {
-            setAvatarPreview(`${ApiBase}/media/user/${profile.user.avatar}`);
+        if (user.user.avatar) {
+            setAvatarPreview(`${ApiBase}/media/user/${user.user.avatar}`);
         }
-    }, [profile.user.avatar]);
+    }, [user.user.avatar]);
 
     const onSubmit = async (data) => {
         const formData = new FormData();
@@ -47,27 +42,7 @@ export function Profile() {
             formData.append('avatar', avatarFile);
         }
 
-        try {
-            const response = await API.updateaccount(formData);
-
-            setType(response.status);
-            setMessage(response.message);
-    
-            
-            setShowMessage(true);
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 5000);
-    
-            if(response.status === 'error') {
-                return;
-            }
-    
-            storage.removeItem("profile");
-            storage.save("profile", response);
-        } catch (error) {
-            console.error('Erro ao editar os dados:', error);
-        }
+        await updateProfile(formData)
     }
 
     const handleAvatarChange = (event) => {
@@ -145,7 +120,7 @@ export function Profile() {
                 {showMessage && <DisplayMessage id="display-message" $type={type} message={message}/>}
 
                 <Button type="submit" $border="true" title="Salvar" />
-                <Button type="button" $border="true" title="Logout" onClick={Logout} />
+                <Button type="button" $border="true" title="Logout" onClick={signOut} />
             </Form>
         </Container>
     );

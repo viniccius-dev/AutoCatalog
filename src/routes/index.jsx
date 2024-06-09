@@ -1,11 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Home } from '../pages/Home';
+import { useAuth } from '../hooks/auth';
 
-export function appRoutes() {
+import { AppRoutes } from './app.routes';
+import { AuthRoutes } from './auth.routes';
+
+export function Routes() {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+        return <></>;
+    }
+
     return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-        </Routes>
+        <BrowserRouter>
+            { user ? <AppRoutes /> : <AuthRoutes />}
+        </BrowserRouter>
     );
-}s
+}

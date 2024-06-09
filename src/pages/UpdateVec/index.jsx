@@ -27,7 +27,11 @@ export function UpdateVec() {
 
     const imgBrandRef = useRef(null);
     const imgVehicleRef = useRef(null);
+    const yearRef = useRef(null);
+    const priceRef = useRef(null);
     const velocityRef = useRef(null);
+    const trunkCapacityRef = useRef(null);
+    const weightRef = useRef(null);
     const tankCapacityRef = useRef(null);
     const consumptionAlcoholRef = useRef(null);
     const consumptionGasolineRef = useRef(null);
@@ -73,6 +77,23 @@ export function UpdateVec() {
     const handleSelectVehicle = useCallback((option) => {
         setSelectedOptionVehicle(option);
         setImgVehiclePreview(`${ApiBase}/media/vehicle/${option.VehImg}`);
+
+        yearRef.current.value = option.year;
+        priceRef.current.value = option.price;
+        velocityRef.current.value = option.velocity;
+        trunkCapacityRef.current.value = option.trunkCapacity;
+        weightRef.current.value = option.weight;
+        
+        handleSelectFuel({ name: option.fuelType });
+        
+        
+        tankCapacityRef.current.value = option.tankCapacity;
+        consumptionAlcoholRef.current.value = option.consumptionAlcohol;
+        consumptionGasolineRef.current.value = option.consumptionGasoline;
+        autonomyAlcoholRef.current.value = option.autonomyAlcohol;
+        autonomyGasolineRef.current.value = option.autonomyGasoline;
+        autonomyEletricRef.current.value = option.autonomyEletric;
+        setSelectedOptionFuel({ name: option.fuelType });
     }, []);
 
     const handleFilterVehicles = useCallback((option) => {
@@ -81,16 +102,15 @@ export function UpdateVec() {
     }, [originalOptionsVehicles]);
 
     const handleSelectFuel = useCallback((option) => {
-        const optionValue = option.name;
-        setSelectedOptionFuel(optionValue);
+        setSelectedOptionFuel(option);
 
-        if (optionValue === 'Combustão') {
+        if (option.name === 'Combustão') {
             autonomyEletricRef.current.disabled = true;
             autonomyEletricRef.current.value = "";
             tankCapacityRef.current.disabled = false;
             consumptionAlcoholRef.current.disabled = false;
             consumptionGasolineRef.current.disabled = false;
-        } else if (optionValue === 'Elétrico') {
+        } else if (option.name === 'Elétrico') {
             tankCapacityRef.current.disabled = true;
             consumptionAlcoholRef.current.disabled = true;
             consumptionGasolineRef.current.disabled = true;
@@ -164,12 +184,28 @@ export function UpdateVec() {
             }
         }
         
+        if(yearRef.current.value){
+            formData.append('year', yearRef.current.value);
+        }
+
+        if(priceRef.current.value) {
+            formData.append('price', priceRef.current.value);
+        }
+        
         if(velocityRef.current.value){
             formData.append('velocity', velocityRef.current.value.replace(',','.'));
         }
 
+        if(trunkCapacityRef.current.value) {
+            formData.append('trunkCapacity', trunkCapacityRef.current.value);
+        }
+
+        if(weightRef.current.value) {
+            formData.append('weight', weightRef.current.value);
+        }
+
         if(selectedOptionFuel !== null) {
-            formData.append('fuelType', selectedOptionFuel);
+            formData.append('fuelType', selectedOptionFuel.name);
             formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : tankCapacityRef.current.value);
             formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value);
             formData.append('autonomyGasoline', autonomyGasolineRef.current.value);
@@ -197,7 +233,7 @@ export function UpdateVec() {
                 if(response.status === 'success') {
                     location.reload();
                 }
-            }, 5000);
+            }, 2000);
         } catch (error) {
             console.error('Erro ao editar os dados:', error);
         }
@@ -393,21 +429,63 @@ export function UpdateVec() {
                             />
                         </label>
 
-                        <InputSelect title="Selecione uma marca" group="brands" options={optionsBrands} onSelect={handleFilterVehicles} />
-                        <InputSelect title="Selecione uma veículo" group="vehicle" options={optionsVehicles} onSelect={handleSelectVehicle} />
+                        <InputSelect 
+                            title="Selecione uma marca" 
+                            group="brands" 
+                            options={optionsBrands} 
+                            onSelect={handleFilterVehicles}                             
+                        />
 
-                        <Input name="vehicleName" placeholder="Atualizar nome" {...registerVehicle("newName")} />
-                        <Input type="number" name="year" placeholder="Atualizar ano" {...registerVehicle("year")} />
-                        <Input type="number" name="price" placeholder="Atualizar preço" {...registerVehicle("price")} />
-                        <Input type="number" step="0.01" name="velocity" placeholder="Atualizar tempo de 0 a 100 km/h" ref={velocityRef} />
-                        <Input type="number" name="trunkCapacity" placeholder="Atualizar cap. do porta malas (L)" {...registerVehicle("trunkCapacity")} />
-                        <Input type="number" name="weight" placeholder="Atualizar peso (Kg)" {...registerVehicle("weight")} />
+                        <InputSelect 
+                            title="Selecione uma veículo" 
+                            group="vehicle" 
+                            options={optionsVehicles} 
+                            onSelect={handleSelectVehicle} 
+                        />
+
+                        <Input 
+                            name="vehicleName" 
+                            placeholder="Atualizar nome" 
+                            {...registerVehicle("newName")} 
+                        />
+                        <Input 
+                            type="number" 
+                            name="year" 
+                            placeholder="Atualizar ano" 
+                            ref={yearRef}
+                        />
+                        <Input 
+                            type="number" 
+                            name="price" 
+                            placeholder="Atualizar preço" 
+                            ref={priceRef}
+                        />
+                        <Input 
+                            type="number" 
+                            step="0.01" 
+                            name="velocity" 
+                            placeholder="Atualizar tempo de 0 a 100 km/h" 
+                            ref={velocityRef} 
+                        />
+                        <Input 
+                            type="number" 
+                            name="trunkCapacity" 
+                            placeholder="Atualizar cap. do porta malas (L)" 
+                            ref={trunkCapacityRef}
+                        />
+                        <Input 
+                            type="number" 
+                            name="weight" 
+                            placeholder="Atualizar peso (Kg)" 
+                            ref={weightRef}
+                        />
 
                         <InputSelect
                             title="Atualize o tipo de propulsão"
                             group="fuel"
                             options={optionsFuel}
                             onSelect={handleSelectFuel}
+                            selected={selectedOptionFuel}
                         />
                         <Input
                             type="number"

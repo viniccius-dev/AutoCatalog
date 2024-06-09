@@ -1,15 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
 
+import { useAuth } from '../../hooks/auth.jsx';
+
 import { Container, Wrapper } from './styles.js';
-
-import storage from '../../helpers/storage.js';
-
 import { LoggedOutUser } from '../LoggedOutUser';
 import { LoggedUser } from '../LoggedUser';
 import { SignIn } from '../SignIn';
 
 export function Header() {
-    const profile = storage.get("profile");
+    const { user } = useAuth();
     const location = useLocation();
 
     return (
@@ -40,7 +39,7 @@ export function Header() {
                     </Link>
                 </div>
 
-                {profile ? <LoggedUser /> : <LoggedOutUser />}
+                {user ? <LoggedUser /> : <LoggedOutUser />}
 
                 <SignIn />
             </Wrapper>

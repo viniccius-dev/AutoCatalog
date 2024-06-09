@@ -4,14 +4,15 @@ import { FaHeart, FaRegHeart } from "react-icons/fa6";
 
 import { Container, Content, Background, Layer } from './styles';
 import { API } from '../../helpers/api';
-import storage from "../../helpers/storage";
+import { useAuth } from "../../hooks/auth";
 
 import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
 import { DisplayMessage } from "../../components/DisplayMessage";
 
 export function Comparison() {
-    const profile = storage.get("profile");
+    const { user } = useAuth();
+
     const [listCars, setListCars] = useState([]);
     const [isLike, setIsLike] = useState(false);
     const [currentComparison, setCurrentComparison] = useState("");
@@ -76,7 +77,7 @@ export function Comparison() {
         }
         setSelectedCars(updatedSelectedCars);
 
-        if (profile) {
+        if (user) {
             try {
                 const filterSelectedCars = updatedSelectedCars.filter(car => car !== null);
                 if (filterSelectedCars.length < 2) return;
@@ -104,7 +105,7 @@ export function Comparison() {
         
         setSelectedCars(updatedSelectedCars);
 
-        if (profile) {
+        if (user) {
             try {
                 const filterSelectedCars = updatedSelectedCars.filter(car => car !== null);
                 if (filterSelectedCars.length < 2) return;
@@ -196,7 +197,7 @@ export function Comparison() {
                         {showMessage && <DisplayMessage id="display-message" $type={type} message={message} />}
                         <header>
                             <h2>Comparação</h2>
-                            {profile && (isLike ? <FaHeart onClick={handleChangeLike} /> : <FaRegHeart onClick={handleChangeLike} />)}
+                            {user && (isLike ? <FaHeart onClick={handleChangeLike} /> : <FaRegHeart onClick={handleChangeLike} />)}
                         </header>
                         <main>
                             {renderTables()}

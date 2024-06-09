@@ -64,6 +64,7 @@ export const Form = styled.form`
         margin: 20px 0;
 
         button:first-child {
+            width: 100%;
             margin-left: 0;
             font-weight: 400;
         }

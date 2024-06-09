@@ -59,6 +59,7 @@ export const DropDownList = styled.ul`
     z-index: 2;
 
     a {
+        white-space: nowrap;
         padding: 10px 25px;
         display: flex;
         justify-content: start;
