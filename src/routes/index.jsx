@@ -9,7 +9,7 @@ export function Routes() {
     const { user, loading } = useAuth();
 
     if (loading) {
-        return <div></div>;
+        return <BrowserRouter><div></div></BrowserRouter>;
     }
 
     return (
