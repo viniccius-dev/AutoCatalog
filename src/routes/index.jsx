@@ -8,10 +8,6 @@ import { AuthRoutes } from './auth.routes';
 export function Routes() {
     const { user, loading } = useAuth();
 
-    if (loading) {
-        return <BrowserRouter><div></div></BrowserRouter>;
-    }
-
     return (
         <BrowserRouter>
             { user ? <AppRoutes /> : <AuthRoutes />}
