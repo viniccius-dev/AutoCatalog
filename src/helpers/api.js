@@ -1,4 +1,4 @@
-const ApiBase = 'http://localhost/projeto/backend/public' ;
+const ApiBase = 'https://autocatalogproject.000webhostapp.com/public/api' ;
 import storage from "./storage";
 
 const API = {
