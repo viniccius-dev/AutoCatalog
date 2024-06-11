@@ -4,7 +4,7 @@ import { FaHeart, FaRegHeart, FaArrowLeft, FaArrowRight } from "react-icons/fa6"
 
 import { Container } from './styles';
 import { Header } from '../../components/Header';
-import { API, ApiBase } from "../../helpers/api";
+import { API, ApiImages } from "../../helpers/api";
 
 export function History() {
     const [listComparison, setListComparison] = useState([]);
@@ -98,28 +98,28 @@ export function History() {
                             <>
                                 {car_1 !== null && (
                                     <img 
-                                        src={`${ApiBase}/media/vehicle/${car_1.vehicleImage}`}
+                                        src={`${ApiImages}/media/vehicle/${car_1.vehicleImage}`}
                                         alt={car_1.vehicleName}
                                         title={car_1.vehicleName}
                                     />     
                                 )}
                                 {car_2 !== null && (
                                     <img 
-                                        src={`${ApiBase}/media/vehicle/${car_2.vehicleImage}`}
+                                        src={`${ApiImages}/media/vehicle/${car_2.vehicleImage}`}
                                         alt={car_2.vehicleName}
                                         title={car_2.vehicleName}
                                     />     
                                 )}
                                 {car_3 !== null && (
                                     <img 
-                                        src={`${ApiBase}/media/vehicle/${car_3.vehicleImage}`} 
+                                        src={`${ApiImages}/media/vehicle/${car_3.vehicleImage}`} 
                                         alt={car_3.vehicleName}
                                         title={car_3.vehicleName}
                                     />     
                                 )}
                                 {car_4 !== null && (
                                     <img 
-                                        src={`${ApiBase}/media/vehicle/${car_4.vehicleImage}`} 
+                                        src={`${ApiImages}/media/vehicle/${car_4.vehicleImage}`} 
                                         alt={car_4.vehicleName}
                                         title={car_4.vehicleName}
                                     />     

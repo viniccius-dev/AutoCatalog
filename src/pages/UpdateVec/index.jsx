@@ -10,7 +10,7 @@ import { InputSelect } from '../../components/InputSelect';
 import { Button } from '../../components/Button';
 import { DisplayMessage } from '../../components/DisplayMessage';
 
-import { API, ApiBase } from '../../helpers/api';
+import { API, ApiImages } from '../../helpers/api';
 
 export function UpdateVec() {
     const optionsFuel = [
@@ -71,12 +71,12 @@ export function UpdateVec() {
 
     const handleSelectBrand = useCallback((option) => {
         setSelectedOptionBrand(option);
-        setImgBrandPreview(`${ApiBase}/media/brand/${option.img}`);
+        setImgBrandPreview(`${ApiImages}/media/brand/${option.img}`);
     }, []);
 
     const handleSelectVehicle = useCallback((option) => {
         setSelectedOptionVehicle(option);
-        setImgVehiclePreview(`${ApiBase}/media/vehicle/${option.VehImg}`);
+        setImgVehiclePreview(`${ApiImages}/media/vehicle/${option.VehImg}`);
 
         yearRef.current.value = option.year;
         priceRef.current.value = option.price;
@@ -138,7 +138,7 @@ export function UpdateVec() {
 
         formData.append('brandId', selectedOptionBrand.id);
 
-        if (imgBrandPreview === `${ApiBase}/media/brand/${selectedOptionBrand.img}`) {
+        if (imgBrandPreview === `${ApiImages}/media/brand/${selectedOptionBrand.img}`) {
             delete data.img;
         }
 
@@ -174,7 +174,7 @@ export function UpdateVec() {
 
         formData.append('vehicleId', selectedOptionVehicle.id);
 
-        if (imgVehiclePreview === `${ApiBase}/media/vehicle/${selectedOptionVehicle.VehImg}`) {
+        if (imgVehiclePreview === `${ApiImages}/media/vehicle/${selectedOptionVehicle.VehImg}`) {
             delete data.VehImg;
         }
 

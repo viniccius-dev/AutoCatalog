@@ -8,7 +8,7 @@ import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
 import { InputSelect } from '../../components/InputSelect';
 
-import { API, ApiBase } from '../../helpers/api';
+import { API, ApiImages } from '../../helpers/api';
 
 export function Info() {
     const [vehicle, setVehicle] = useState(null);

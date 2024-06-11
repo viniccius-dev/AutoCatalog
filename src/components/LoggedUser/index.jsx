@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/auth";
 
 import { Container, NoAvatar, DropDownList } from './styles';
 
-import { ApiBase } from '../../helpers/api';
+import { ApiImages } from '../../helpers/api';
 
 export function LoggedUser() {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +39,7 @@ export function LoggedUser() {
 
                     <img
                         onClick={handleDropDownList}
-                        src={`${ApiBase}/media/user/${user.user.avatar}`}
+                        src={`${ApiImages}/media/user/${user.user.avatar}`}
                         alt="Foto do usuário"
                     />
                 }

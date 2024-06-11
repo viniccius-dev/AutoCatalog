@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Container } from './styles';
 import { InputSelect } from '../InputSelect';
 
-import { ApiBase } from '../../helpers/api';
+import { ApiImages } from '../../helpers/api';
 
 export function Table({ title, list, img, data, onSelect, onRemove, comparison, index }) {
     const [selectVehicle, setSelectVehicle] = useState(data || null);
@@ -98,7 +98,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                 {img && 
                 <tr>
                     <td colSpan="2" className="td-img">
-                        {selectVehicle && <img src={`${ApiBase}/media/vehicle/${selectVehicle.VehImg}`} alt={selectVehicle.VehName} />}
+                        {selectVehicle && <img src={`${ApiImages}/media/vehicle/${selectVehicle.VehImg}`} alt={selectVehicle.VehName} />}
                     </td>
                 </tr>
                 }            

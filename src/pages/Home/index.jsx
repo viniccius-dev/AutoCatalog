@@ -6,7 +6,7 @@ import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 import { Vehicles } from '../../components/Vehicles';
 
-import { API, ApiBase } from '../../helpers/api';
+import { API, ApiImages } from '../../helpers/api';
 
 export function Home() {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +52,7 @@ export function Home() {
                             key={brand.id} 
                             onClick={() => openModal(brand.name)} 
                             title={brand.name} 
-                            img={`${ApiBase}/media/brand/${brand.img}`} 
+                            img={`${ApiImages}/media/brand/${brand.img}`} 
                             alt="Marca" 
                         />
                     ))}

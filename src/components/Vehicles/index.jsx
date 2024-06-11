@@ -4,7 +4,7 @@ import { FiX } from 'react-icons/fi';
 import { Background, Container, Content } from './styles';
 import { Card } from '../../components/Card';
 
-import { ApiBase } from '../../helpers/api';
+import { ApiImages } from '../../helpers/api';
 
 export function Vehicles({ closeModal, cars }) {
 
@@ -28,7 +28,7 @@ export function Vehicles({ closeModal, cars }) {
                         <Card 
                             key={car.id} 
                             title={car.VehName} 
-                            img={`${ApiBase}/media/vehicle/${car.VehImg}`} 
+                            img={`${ApiImages}/media/vehicle/${car.VehImg}`} 
                             alt="vehicle" 
                             onClick={() => handleNavigateInfo(car.id)}
                         />

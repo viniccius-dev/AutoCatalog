@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Container, Form, Avatar, NoAvatar } from './styles';
 
 import { useAuth } from '../../hooks/auth';
-import { ApiBase } from '../../helpers/api';
+import { ApiImages } from '../../helpers/api';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
@@ -27,7 +27,7 @@ export function Profile() {
 
     useEffect(() => {
         if (user.user.avatar) {
-            setAvatarPreview(`${ApiBase}/media/user/${user.user.avatar}`);
+            setAvatarPreview(`${ApiImages}/media/user/${user.user.avatar}`);
         }
     }, [user.user.avatar]);
 

@@ -2,7 +2,7 @@ import { Container, Form, Section } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect,  useCallback } from 'react';
 
-import { API, ApiBase } from '../../helpers/api'; // Importe a API
+import { API, ApiImages } from '../../helpers/api'; // Importe a API
 
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -55,7 +55,7 @@ export function New() {
 
     const handleSelectBrand = useCallback((option) => {
         setSelectedOptionBrand(option);
-        setImgBrandPreview(`${ApiBase}/media/brand/${option.img}`);
+        setImgBrandPreview(`${ApiImages}/media/brand/${option.img}`);
 
         imgBrandRef.current.disabled = true;
         newBrandRef.current.disabled = true;

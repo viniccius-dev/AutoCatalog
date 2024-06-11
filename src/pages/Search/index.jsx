@@ -16,7 +16,7 @@ import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 import { Card } from '../../components/Card';
 
-import { API, ApiBase } from '../../helpers/api';
+import { API, ApiImages } from '../../helpers/api';
 
 export function Search() {
     const fuels = ['Combustão', 'Elétrico', 'Híbrido'];
@@ -237,7 +237,7 @@ export function Search() {
                                     <Card 
                                         key={car.id} 
                                         title={car.VehName} 
-                                        img={`${ApiBase}/media/vehicle/${car.VehImg}`} 
+                                        img={`${ApiImages}/media/vehicle/${car.VehImg}`} 
                                         onClick={() => handleNavigateInfo(car.id)}
                                         alt="vehicle" 
                                     />
