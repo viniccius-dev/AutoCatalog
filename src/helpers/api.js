@@ -47,12 +47,10 @@ const API = {
 
     updateaccount: async (formData) => {
         const token = storage.get("token");
+        formData.append('token', token);
     
         const response = await fetch(ApiBase + '/updateaccount', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
             body: formData 
         });
     
@@ -66,12 +64,10 @@ const API = {
 
     createVehicle: async (formData) => {
         const token = storage.get("token");
+        formData.append('token', token);
     
         const response = await fetch(ApiBase + '/addcar', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
             body: formData 
         });
     
@@ -128,12 +124,10 @@ const API = {
 
     updatebrand: async (formData) => {
         const token = storage.get("token");
+        formData.append('token', token);
     
         const response = await fetch(ApiBase + '/updatebrand', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
             body: formData 
         });
     
@@ -152,10 +146,7 @@ const API = {
     
         const response = await fetch(ApiBase + '/deletebrand', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ id })
+            body: JSON.stringify({ id , token })
         });
     
         if (!response.ok) {
@@ -168,12 +159,10 @@ const API = {
 
     updatevehicle: async (formData) => {
         const token = storage.get("token");
+        formData.append('token', token);
     
         const response = await fetch(ApiBase + '/updatecar', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
             body: formData 
         });
     
@@ -192,10 +181,7 @@ const API = {
     
         const response = await fetch(ApiBase + '/deletecar', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ id })
+            body: JSON.stringify({ id , token})
         });
     
         if (!response.ok) {
@@ -213,10 +199,7 @@ const API = {
     
         const response = await fetch(ApiBase + '/savehistory', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ history })
+            body: JSON.stringify({ history,token })
         });
     
         if (!response.ok) {
@@ -230,13 +213,10 @@ const API = {
     renderhistory:async (page) => {
 
         const token = storage.get("token");
-        const url = `${ApiBase}/renderhistory?page=${page}`;
+        const url = `${ApiBase}/renderhistory?page=${page}&token=${token}`;
 
         const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
+            method: 'GET'
         });
 
         const json = await response.json();
@@ -246,13 +226,10 @@ const API = {
     renderLikes:async (page) => {
 
         const token = storage.get("token");
-        const url = `${ApiBase}/renderlikes?page=${page}`;
+        const url = `${ApiBase}/renderlikes?page=${page}&token=${token}`;
 
         const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
+            method: 'GET'
         });
 
         const json = await response.json();
@@ -266,10 +243,7 @@ const API = {
     
         const response = await fetch(ApiBase + '/addfavorites', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ id })
+            body: JSON.stringify({ id, token})
         });
     
         if (!response.ok) {
@@ -284,7 +258,5 @@ const API = {
 
 
 };
-
-
 
 export { API, ApiBase, ApiImages };

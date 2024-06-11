@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
@@ -19,10 +18,9 @@ export function Profile() {
     const [avatarPreview, setAvatarPreview] = useState(user.user.avatar || "");
     const [avatarFile, setAvatarFile] = useState(null); // Estado para armazenar o arquivo de avatar
 
-    const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate(-1);
+        window.location.href = "/";
     }
 
     useEffect(() => {
@@ -65,7 +63,7 @@ export function Profile() {
             <Form onSubmit={handleSubmit(onSubmit)} >
                 <Avatar>
                     {
-                        avatarPreview
+                        !avatarPreview
                         
                         ?
 
