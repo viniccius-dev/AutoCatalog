@@ -33,7 +33,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
     };
 
     const renderValue = (value, attribute) => {
-        if (value === "0" || value === "0.00" || value === 0) return "N/A";
+        if (value == "0" || value === "0.00") return "N/A";
         let formattedValue = value;
         switch (attribute) {
             case 'price':
@@ -111,7 +111,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.year, 'year')}
-                            {selectVehicle && selectVehicle.year !== "0" && selectVehicle.year !== "0.00" && renderComparisonIcon('year')}
+                            {selectVehicle && selectVehicle.year != "0" && selectVehicle.year !== "0.00" && renderComparisonIcon('year')}
                         </div>
                     </td>
                 </tr>
@@ -120,7 +120,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.price, 'price')}
-                            {selectVehicle && selectVehicle.price !== "0" && selectVehicle.price !== "0.00" && renderComparisonIcon('price')}
+                            {selectVehicle && selectVehicle.price != "0" && selectVehicle.price !== "0.00" && renderComparisonIcon('price')}
                         </div>
                     </td>
                 </tr>
@@ -129,7 +129,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.velocity, 'velocity')}
-                            {selectVehicle && selectVehicle.velocity !== "0" && selectVehicle.velocity !== "0.00" && renderComparisonIcon('velocity')}
+                            {selectVehicle && selectVehicle.velocity != "0" && selectVehicle.velocity !== "0.00" && renderComparisonIcon('velocity')}
                         </div>
                     </td>
                 </tr>
@@ -138,7 +138,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.trunkCapacity, 'trunkCapacity')}
-                            {selectVehicle && selectVehicle.trunkCapacity !== "0" && selectVehicle.trunkCapacity !== "0.00" && renderComparisonIcon('trunkCapacity')}
+                            {selectVehicle && selectVehicle.trunkCapacity != "0" && selectVehicle.trunkCapacity !== "0.00" && renderComparisonIcon('trunkCapacity')}
                         </div>
                     </td>
                 </tr>
@@ -147,7 +147,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.weight, 'weight')}
-                            {selectVehicle && selectVehicle.weight !== "0" && selectVehicle.weight !== "0.00" && renderComparisonIcon('weight')}
+                            {selectVehicle && selectVehicle.weight != "0" && selectVehicle.weight !== "0.00" && renderComparisonIcon('weight')}
                         </div>
                     </td>
                 </tr>
@@ -156,7 +156,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.tankCapacity, 'tankCapacity')}
-                            {selectVehicle && selectVehicle.tankCapacity !== "0" && selectVehicle.tankCapacity !== "0.00" && renderComparisonIcon('tankCapacity')}
+                            {selectVehicle && selectVehicle.tankCapacity != "0" && selectVehicle.tankCapacity !== "0.00" && renderComparisonIcon('tankCapacity')}
                         </div>
                     </td>
                 </tr>
@@ -165,7 +165,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.consumptionAlcohol, 'consumptionAlcohol')}
-                            {selectVehicle && selectVehicle.consumptionAlcohol !== "0" && selectVehicle.consumptionAlcohol !== "0.00" && renderComparisonIcon('consumptionAlcohol')}
+                            {selectVehicle && selectVehicle.consumptionAlcohol != "0" && selectVehicle.consumptionAlcohol !== "0.00" && renderComparisonIcon('consumptionAlcohol')}
                         </div>
                     </td>
                 </tr>
@@ -174,7 +174,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.consumptionGasoline, 'consumptionGasoline')}
-                            {selectVehicle && selectVehicle.consumptionGasoline !== "0" && selectVehicle.consumptionGasoline !== "0.00" && renderComparisonIcon('consumptionGasoline')}
+                            {selectVehicle && selectVehicle.consumptionGasoline != "0" && selectVehicle.consumptionGasoline !== "0.00" && renderComparisonIcon('consumptionGasoline')}
                         </div>
                     </td>
                 </tr>
@@ -183,7 +183,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.autonomyAlcohol, 'autonomyAlcohol')}
-                            {selectVehicle && selectVehicle.autonomyAlcohol !== "0" && selectVehicle.autonomyAlcohol !== "0.00" && renderComparisonIcon('autonomyAlcohol')}
+                            {selectVehicle && selectVehicle.autonomyAlcohol != "0" && selectVehicle.autonomyAlcohol !== "0.00" && renderComparisonIcon('autonomyAlcohol')}
                         </div>
                     </td>
                 </tr>
@@ -192,7 +192,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.autonomyGasoline, 'autonomyGasoline')}
-                            {selectVehicle && selectVehicle.autonomyGasoline !== "0" && selectVehicle.autonomyGasoline !== "0.00" && renderComparisonIcon('autonomyGasoline')}
+                            {selectVehicle && selectVehicle.autonomyGasoline != "0" && selectVehicle.autonomyGasoline !== "0.00" && renderComparisonIcon('autonomyGasoline')}
                         </div>
                     </td>
                 </tr>
@@ -201,7 +201,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
                     <td>
                         <div>
                             {selectVehicle && renderValue(selectVehicle.autonomyEletric, 'autonomyEletric')}
-                            {selectVehicle && selectVehicle.autonomyEletric !== "0" && selectVehicle.autonomyEletric !== "0.00" && renderComparisonIcon('autonomyEletric')}
+                            {selectVehicle && selectVehicle.autonomyEletric != "0" && selectVehicle.autonomyEletric !== "0.00" && renderComparisonIcon('autonomyEletric')}
                         </div>
                     </td>
                 </tr>
