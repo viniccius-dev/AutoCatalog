@@ -207,8 +207,8 @@ export function UpdateVec() {
         if(selectedOptionFuel !== null) {
             formData.append('fuelType', selectedOptionFuel.name);
             formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : tankCapacityRef.current.value);
-            formData.append('autonomyAlcohol', autonomyAlcohol.current.value === '' ? 0 : autonomyAlcoholRef.current.value);
-            formData.append('autonomyGasoline', autonomyGasoline.current.value === '' ? 0 : autonomyGasolineRef.current.value);
+            formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value === '' ? 0 : autonomyAlcoholRef.current.value);
+            formData.append('autonomyGasoline', autonomyGasolineRef.current.value === '' ? 0 : autonomyGasolineRef.current.value);
             formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
             formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value.replace(',', '.'));
             formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value.replace(',', '.'));
