@@ -114,8 +114,8 @@ export function New() {
         formData.append('weight', e.target.weight.value);
         formData.append('fuelType', selectedOptionFuel);
         formData.append('tankCapacity', tankCapacityRef.current.disabled ? 0 : tankCapacityRef.current.value);
-        formData.append('autonomyAlcohol', tankCapacityRef.current.disabled ? 0 : autonomyAlcoholRef.current.value);
-        formData.append('autonomyGasoline', tankCapacityRef.current.disabled ? 0 : autonomyGasolineRef.current.value);
+        formData.append('autonomyAlcohol', autonomyAlcoholRef.current.disabled ? 0 : autonomyAlcoholRef.current.value);
+        formData.append('autonomyGasoline', autonomyGasolineRef.current.disabled ? 0 : autonomyGasolineRef.current.value);
         formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
         formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value.replace(',', '.'));
         formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value.replace(',', '.'));
