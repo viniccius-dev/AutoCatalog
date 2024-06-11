@@ -104,6 +104,9 @@ export function New() {
         if(selectedOptionBrand === null) {
             formData.append('brandImage', imgBrandRef.current.files[0]);
         }
+
+        console.log(autonomyAlcoholRef.current.value)
+
         formData.append('vehicleImage', document.querySelector('#vehicle').files[0]);
         formData.append('brand', selectedOptionBrand ? selectedOptionBrand.name : newBrandRef.current.value);
         formData.append('vehicleName', e.target.vehicleName.value);
