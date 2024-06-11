@@ -27,7 +27,7 @@ export function LoggedUser() {
 
             <a>
                 {
-                    user.user.avatar === "" 
+                    user.user.avatar
                     
                     ?
 
