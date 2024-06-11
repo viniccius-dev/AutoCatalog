@@ -57,7 +57,7 @@ export function Info() {
                                 onSelect={handleNewInfo}
                             />
 
-                            {vehicle && <img src={`${ApiBase}/media/vehicle/${vehicle.VehImg}`} />}
+                            {vehicle && <img src={`${ApiImages}/media/vehicle/${vehicle.VehImg}`} />}
 
                             <button onClick={() => handleCardClick(vehicle)}>
                                 Realizar comparação
