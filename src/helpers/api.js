@@ -19,9 +19,6 @@ const API = {
     createaccount:async (e) => {
         const response = await fetch(ApiBase + '/createaccount', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(e) 
         });
     
@@ -36,9 +33,6 @@ const API = {
     login:async (e) => {
         const response = await fetch(ApiBase + '/loginuser', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(e) 
         });
     
@@ -56,7 +50,7 @@ const API = {
         const response = await fetch(ApiBase + '/updateaccount', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
             },
             body: formData 
         });
@@ -90,10 +84,7 @@ const API = {
 
     renderBrands:async () => {
         const response = await fetch(ApiBase + '/renderbrands', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'POST'
         });
     
         const json = await response.json();
@@ -102,10 +93,7 @@ const API = {
 
     renderCars:async () => {
         const response = await fetch(ApiBase + '/rendercars', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'POST'
         });
     
         const json = await response.json();
@@ -118,10 +106,7 @@ const API = {
         const url = `${ApiBase}/search?search=${filters.search}&valueMin=${filters.valueMin}&valueMax=${filters.valueMax}&consumptionMin=${filters.consumptionMin}&consumptionMax=${filters.consumptionMax}&brandsSelected=${filters.brandsSelected}&yearsSelected=${filters.yearsSelected}&fuelsSelected=${filters.fuelsSelected}`;
 
         const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'GET'
         });
 
         const json = await response.json();
@@ -133,10 +118,7 @@ const API = {
         const url = `${ApiBase}/rendervehicle?id=${id}`;
 
         const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'GET'
         });
 
         const json = await response.json();
@@ -170,8 +152,7 @@ const API = {
         const response = await fetch(ApiBase + '/deletebrand', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ id })
         });
@@ -211,8 +192,7 @@ const API = {
         const response = await fetch(ApiBase + '/deletecar', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ id })
         });
@@ -233,8 +213,7 @@ const API = {
         const response = await fetch(ApiBase + '/savehistory', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ history })
         });
@@ -255,8 +234,7 @@ const API = {
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             },
         });
 
@@ -272,8 +250,7 @@ const API = {
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             },
         });
 
@@ -289,8 +266,7 @@ const API = {
         const response = await fetch(ApiBase + '/addfavorites', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ id })
         });
