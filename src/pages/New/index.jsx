@@ -104,9 +104,6 @@ export function New() {
         if(selectedOptionBrand === null) {
             formData.append('brandImage', imgBrandRef.current.files[0]);
         }
-
-        console.log(autonomyAlcoholRef.current.value)
-
         formData.append('vehicleImage', document.querySelector('#vehicle').files[0]);
         formData.append('brand', selectedOptionBrand ? selectedOptionBrand.name : newBrandRef.current.value);
         formData.append('vehicleName', e.target.vehicleName.value);
@@ -116,9 +113,9 @@ export function New() {
         formData.append('trunkCapacity', e.target.trunkCapacity.value);
         formData.append('weight', e.target.weight.value);
         formData.append('fuelType', selectedOptionFuel);
-        formData.append('tankCapacity', tankCapacityRef.current.disabled ? 0 : tankCapacityRef.current.value);
-        formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value === '' ? 0 : autonomyAlcoholRef.current.value);
-        formData.append('autonomyGasoline', autonomyGasolineRef.current.value === '' ? 0 : autonomyGasolineRef.current.value);
+        formData.append('tankCapacity', tankCapacityRef.current.disabled ? 'N/A' : tankCapacityRef.current.value);
+        formData.append('autonomyAlcohol', autonomyAlcoholRef.current.value);
+        formData.append('autonomyGasoline', autonomyGasolineRef.current.value);
         formData.append('autonomyEletric', autonomyEletricRef.current.disabled ? 'N/A' : autonomyEletricRef.current.value);
         formData.append('consumptionAlcohol', consumptionAlcoholRef.current.disabled ? 'N/A' : consumptionAlcoholRef.current.value.replace(',', '.'));
         formData.append('consumptionGasoline', consumptionGasolineRef.current.disabled ? 'N/A' : consumptionGasolineRef.current.value.replace(',', '.'));
