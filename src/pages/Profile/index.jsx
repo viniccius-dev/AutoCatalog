@@ -65,7 +65,7 @@ export function Profile() {
             <Form onSubmit={handleSubmit(onSubmit)} >
                 <Avatar>
                     {
-                        avatarPreview === "" 
+                        avatarPreview
                         
                         ?
 
