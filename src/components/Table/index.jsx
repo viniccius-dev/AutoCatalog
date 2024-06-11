@@ -33,7 +33,7 @@ export function Table({ title, list, img, data, onSelect, onRemove, comparison, 
     };
 
     const renderValue = (value, attribute) => {
-        if (value === "0" || value === "0.00") return "N/A";
+        if (value === "0" || value === "0.00" || value === 0) return "N/A";
         let formattedValue = value;
         switch (attribute) {
             case 'price':
