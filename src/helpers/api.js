@@ -1,5 +1,5 @@
 const ApiBase = 'https://autocatalogproject.000webhostapp.com/public/api' ;
-const ApiImages = 'https://autocatalogproject.000webhostapp.com/public/';
+const ApiImages = 'https://autocatalogproject.000webhostapp.com/public';
 import storage from "./storage";
 
 const API = {
